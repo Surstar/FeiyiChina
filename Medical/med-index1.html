@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="gb2312">
-<title>·ÇÒÅÒ½Ò©-Ê×Ò³</title>
+<meta charset="UTF-8">
+<title>éé—åŒ»è¯-é¦–é¡µ</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
 /* --- reset --- */
@@ -23,7 +23,7 @@ body{
   font-family:"Noto Serif SC","Microsoft YaHei",sans-serif,'fzqkys';
   background:#fdfaf4;
 }
-/* --- ÖĞÒ©µ¼º½À¸ --- */
+/* --- ä¸­è¯å¯¼èˆªæ  --- */
 .tcm-nav{
   display:flex;
   justify-content:center;
@@ -31,7 +31,7 @@ body{
   gap:2rem;
   padding:19.2px 0;
   background:#f5f2eb;
-  border-bottom:2px solid #4a7c59;   /* ²İÒ©ÂÌ */
+  border-bottom:2px solid #4a7c59;   /* è‰è¯ç»¿ */
   box-shadow:0 2px 5px rgba(0,0,0,.08);
 }
 .tcm-nav a,.tcm-nav .current{
@@ -59,9 +59,9 @@ body{
 .nav-list   ::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z'/%3E%3C/svg%3E");}
 .nav-pedia  ::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M5 4v16h7v-2H7V6h10v10h1v2h3V4H5z'/%3E%3C/svg%3E");}
 .nav-feedback::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z'/%3E%3C/svg%3E");}
-/* µ±Ç°Ò³Í¼±ê·´°× */
+/* å½“å‰é¡µå›¾æ ‡åç™½ */
 .tcm-nav .current::before{filter:invert(1);}
-/* ÏìÓ¦Ê½ */
+/* å“åº”å¼ */
 @media(max-width:600px){
   .tcm-nav{flex-direction:column;gap:.8rem;}
 }
@@ -103,7 +103,7 @@ body{
     font-size: 18px;
     color: #2b5329;
 }
-/* Í¼Æ¬ÈİÆ÷£ººáÏòÅÅÁĞ */
+/* å›¾ç‰‡å®¹å™¨ï¼šæ¨ªå‘æ’åˆ— */
 .image-container {
     display: flex;
     gap: 1rem;
@@ -111,14 +111,14 @@ body{
     margin: 2rem 0;
 }
 
-/* Ã¿¸öÍ¼Æ¬°ü×°Æ÷£ºÏà¶Ô¶¨Î»£¬ÓÃÓÚÕÚÕÖ */
+/* æ¯ä¸ªå›¾ç‰‡åŒ…è£…å™¨ï¼šç›¸å¯¹å®šä½ï¼Œç”¨äºé®ç½© */
 .image-wrapper {
     position: relative;
     flex: 1;
     max-width: 480px;
 }
 
-/* Í¼Æ¬ÑùÊ½ */
+/* å›¾ç‰‡æ ·å¼ */
 .image-wrapper img {
     width: 100%;
     height: auto;
@@ -126,14 +126,14 @@ body{
     display: block;
 }
 
-/* ÕÚÕÖ²ã */
+/* é®ç½©å±‚ */
 .overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* °ëÍ¸Ã÷ºÚÉ« */
+    background-color: rgba(0, 0, 0, 0.4); /* åŠé€æ˜é»‘è‰² */
     color: #fff;
     display: flex;
     align-items: center;
@@ -141,35 +141,35 @@ body{
     font-size: 1.5rem;
     font-weight: bold;
     border-radius: 8px;
-    pointer-events: none; /* ²»Ó°Ïìµã»÷Í¼Æ¬ */
+    pointer-events: none; /* ä¸å½±å“ç‚¹å‡»å›¾ç‰‡ */
 }
-/* È«¿íºá·ùÈİÆ÷ */
+/* å…¨å®½æ¨ªå¹…å®¹å™¨ */
 .full-width-banner {
     display: flex;
-    width: 100vw;          /* ÊÓ¿Ú¿í¶È */
-    height: 100vh;          /* ÊÓ¿Ú¸ß¶ÈÒ»°ë£¬¿É×ÔĞĞµ÷Õû */
+    width: 100vw;          /* è§†å£å®½åº¦ */
+    height: 100vh;          /* è§†å£é«˜åº¦ä¸€åŠï¼Œå¯è‡ªè¡Œè°ƒæ•´ */
     overflow: hidden;
 }
 
-/* Ã¿¸öÍ¼Æ¬¿é */
+/* æ¯ä¸ªå›¾ç‰‡å— */
 .banner-item {
     position: relative;
     flex: 1;
     height: 100%;
 }
 
-/* Í¼Æ¬ÑùÊ½£ºÆÌÂúÈİÆ÷ */
+/* å›¾ç‰‡æ ·å¼ï¼šé“ºæ»¡å®¹å™¨ */
 .banner-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover;     /* ²Ã¼ôÌîÂú£¬²»±äĞÎ */
+    object-fit: cover;     /* è£å‰ªå¡«æ»¡ï¼Œä¸å˜å½¢ */
     display: block;
 }
 
-/* ÕÚÕÖ²ã */
+/* é®ç½©å±‚ */
 .overlay {
     position: absolute;
-    inset: 0;              /* µÈ¼ÛÓÚ top:0; left:0; right:0; bottom:0; */
+    inset: 0;              /* ç­‰ä»·äº top:0; left:0; right:0; bottom:0; */
     background: rgba(0,0,0,0.4);
     color: #fff;
     display: flex;
@@ -179,53 +179,53 @@ body{
     font-weight: bold;
     pointer-events: none;
 }
-/* ÈİÆ÷£º×İÏò¾ÓÖĞ */
+/* å®¹å™¨ï¼šçºµå‘å±…ä¸­ */
 .title-wrap {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0; /* ÎŞ¼äÏ¶ */
+    gap: 0; /* æ— é—´éš™ */
 }
 
-/* ±êÌâ±¾Éí */
+/* æ ‡é¢˜æœ¬èº« */
 /*.decorated-title {*/
 /*    position: relative;*/
 /*    margin: 0;*/
-/*    padding: 80px 0; !* ÉÏÏÂÁô³öÍ¼ĞÎ¿Õ¼ä£¬ÓëÍ¼ĞÎÍ¬¸ß *!*/
+/*    padding: 80px 0; !* ä¸Šä¸‹ç•™å‡ºå›¾å½¢ç©ºé—´ï¼Œä¸å›¾å½¢åŒé«˜ *!*/
 /*    font-size: 5rem;*/
 /*    color: #2b5329;*/
 /*}*/
 
-/* ========= ÖĞÑëÍ¸Ã÷ÈİÆ÷ ========= */
-.banner-item:last-of-type {          /* ½ö×÷ÓÃÓÚÓÒ²àÍ¼Æ¬ */
-    position: relative;                /* ¸ø×ÓÔªËØ¾ø¶Ô¶¨Î»²Î¿¼ */
+/* ========= ä¸­å¤®é€æ˜å®¹å™¨ ========= */
+.banner-item:last-of-type {          /* ä»…ä½œç”¨äºå³ä¾§å›¾ç‰‡ */
+    position: relative;                /* ç»™å­å…ƒç´ ç»å¯¹å®šä½å‚è€ƒ */
 }
 
 .center-box {
     position: absolute;
-    inset: 0;                          /* ÉÏÏÂ×óÓÒÈ« 0£¬ÍêÈ«¾ÓÖĞ */
-    margin: auto;                      /* ¹Ø¼ü£º×Ô¶¯¾ÓÖĞ */
+    inset: 0;                          /* ä¸Šä¸‹å·¦å³å…¨ 0ï¼Œå®Œå…¨å±…ä¸­ */
+    margin: auto;                      /* å…³é”®ï¼šè‡ªåŠ¨å±…ä¸­ */
     width: 800px;
     height: 150px;
-    background: none; /* °ëÍ¸Ã÷°×Ö½ */
+    background: none; /* åŠé€æ˜ç™½çº¸ */
 
     border-radius: 8px;
     box-shadow:none;
     display: flex;
-    align-items: center;               /* ´¹Ö±¾ÓÖĞ */
+    align-items: center;               /* å‚ç›´å±…ä¸­ */
     gap: 20px;
     padding: 0 20px;
-    pointer-events: none;              /* Ä¬ÈÏ²»µ²Í¼Æ¬µã»÷ */
+    pointer-events: none;              /* é»˜è®¤ä¸æŒ¡å›¾ç‰‡ç‚¹å‡» */
 }
 
-/* ÈÃÄÚ²¿ÔªËØ¿Éµã»÷ */
+/* è®©å†…éƒ¨å…ƒç´ å¯ç‚¹å‡» */
 .side-title,
 .side-menu {
     pointer-events: auto;
 }
 
-/* ========= ×ó²à±êÌâ ========= */
+/* ========= å·¦ä¾§æ ‡é¢˜ ========= */
 .side-title {
     flex: 0 0 auto;
     display: flex;
@@ -235,7 +235,7 @@ body{
 }
 
 .decorated-title {
-    writing-mode: vertical-rl;         /* ÊúÅÅÎÄ×Ö */
+    writing-mode: vertical-rl;         /* ç«–æ’æ–‡å­— */
     font-size: 50px;
     color: #ffffff;
     letter-spacing: 6px;
@@ -245,7 +245,7 @@ body{
     font-family: "Noto Serif SC", "Microsoft YaHei", sans-serif;
 }
 
-/* ÉÏÍ¼ĞÎ */
+/* ä¸Šå›¾å½¢ */
 .decorated-title::before {
     content: "";
     position: absolute;
@@ -258,7 +258,7 @@ body{
     background-size: 64px 22px;
 }
 
-/* ÏÂÍ¼ĞÎ */
+/* ä¸‹å›¾å½¢ */
 .decorated-title::after {
     content: "";
     position: absolute;
@@ -271,15 +271,15 @@ body{
     background-size: 64px 22px;
 }
 
-/* ========= ÓÒ²à²Ëµ¥ ========= */
+/* ========= å³ä¾§èœå• ========= */
 .side-menu {
     flex: 1;
     display: flex;
-    flex-direction: column; /* È·±£²Ëµ¥ÏîÊúÏòÅÅÁĞ */
-    gap: 10px; /* µ÷Õû²Ëµ¥ÏîÖ®¼äµÄ¼ä¾à */
-    padding-left: 20px; /* Îª²Ëµ¥ÏîÌí¼Ó×ó±ß¾à£¬Ê¹ÆäÓë±êÌâ¶ÔÆë */
-    writing-mode: vertical-lr; /* ÉèÖÃÎÄ×ÖÎªÊúÏòÅÅÁĞ */
-    text-orientation: mixed; /* ±£³Ö×ÖÄ¸ºÍÊı×ÖÕı³£ÏÔÊ¾ */
+    flex-direction: column; /* ç¡®ä¿èœå•é¡¹ç«–å‘æ’åˆ— */
+    gap: 10px; /* è°ƒæ•´èœå•é¡¹ä¹‹é—´çš„é—´è· */
+    padding-left: 20px; /* ä¸ºèœå•é¡¹æ·»åŠ å·¦è¾¹è·ï¼Œä½¿å…¶ä¸æ ‡é¢˜å¯¹é½ */
+    writing-mode: vertical-lr; /* è®¾ç½®æ–‡å­—ä¸ºç«–å‘æ’åˆ— */
+    text-orientation: mixed; /* ä¿æŒå­—æ¯å’Œæ•°å­—æ­£å¸¸æ˜¾ç¤º */
 }
 
 .side-menu a {
@@ -289,10 +289,10 @@ body{
     transition: color .3s;
     letter-spacing: 8px;
     display: flex;
-    align-items: center; /* ´¹Ö±¾ÓÖĞ¶ÔÆëÎÄ±¾ */
-    writing-mode: vertical-lr; /* ¼Ì³Ğ¸¸¼¶ÉèÖÃ */
-    text-orientation: mixed; /* ¼Ì³Ğ¸¸¼¶ÉèÖÃ */
-    padding: 5px 0; /* Ìí¼ÓÉÏÏÂÄÚ±ß¾à */
+    align-items: center; /* å‚ç›´å±…ä¸­å¯¹é½æ–‡æœ¬ */
+    writing-mode: vertical-lr; /* ç»§æ‰¿çˆ¶çº§è®¾ç½® */
+    text-orientation: mixed; /* ç»§æ‰¿çˆ¶çº§è®¾ç½® */
+    padding: 5px 0; /* æ·»åŠ ä¸Šä¸‹å†…è¾¹è· */
     font-family: "Noto Serif SC", "Microsoft YaHei", sans-serif;
 }
 
@@ -304,31 +304,31 @@ body{
 <body>
 
 <nav class="tcm-nav">
-  <a class="nav-home"  href="../index/index.html">·ÇÒÅÖĞ¹ú</span>
-  <a class="current nav-home" href="../index/index.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">Ê×Ò³</span>
-  <a class="nav-list"   href="list/list.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">Çåµ¥</a>
-  <a class="nav-pedia"  href="pedia/pedia.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">°Ù¿Æ</a>
-  <a class="nav-feedback" href="feedback/feedback_contact.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">·´À¡</a></nav>
-<!-- È«¿íÍ¼Æ¬ºá·ù -->
+  <a class="nav-home"  href="../index/index.html">éé—ä¸­å›½</span>
+  <a class="current nav-home" href="../index/index.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">é¦–é¡µ</span>
+  <a class="nav-list"   href="list/list.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">æ¸…å•</a>
+  <a class="nav-pedia"  href="pedia/pedia.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">ç™¾ç§‘</a>
+  <a class="nav-feedback" href="feedback/feedback_contact.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">åé¦ˆ</a></nav>
+<!-- å…¨å®½å›¾ç‰‡æ¨ªå¹… -->
 <div class="full-width-banner">
     <div class="banner-item">
-        <img src="../image/chayuan.jpg" alt="²èÔ°">
+        <img src="../image/chayuan.jpg" alt="èŒ¶å›­">
         <div class="overlay"></div>
     </div>
     <div class="banner-item">
-        <img src="../image/beijing.jpg" alt="±³¾°">
+        <img src="../image/beijing.jpg" alt="èƒŒæ™¯">
         <div class="overlay"></div>
-        <!-- ÓÒ²àÍ¼Æ¬ÄÚ²¿ÖĞÑëÈİÆ÷ -->
+        <!-- å³ä¾§å›¾ç‰‡å†…éƒ¨ä¸­å¤®å®¹å™¨ -->
         <div class="center-box">
-            <!-- ×ó²à±êÌâÇø -->
+            <!-- å·¦ä¾§æ ‡é¢˜åŒº -->
             <div class="side-title">
-                <b class="decorated-title">·ÇÒÅÒ½Ò©</b>
+                <b class="decorated-title">éé—åŒ»è¯</b>
             </div>
 
-            <!-- ÓÒ²à²Ëµ¥Çø -->
+            <!-- å³ä¾§èœå•åŒº -->
             <nav class="side-menu">
-                <a href="list/list.html"> Çåµ¥</a>
-                <a href="pedia/pedia.html"> °Ù¿Æ</a>
+                <a href="list/list.html"> æ¸…å•</a>
+                <a href="pedia/pedia.html"> ç™¾ç§‘</a>
             </nav>
         </div>
     </div>
@@ -345,42 +345,43 @@ body{
 <!--    </div>-->
 
 <!--</div>-->
-<!--·ÏÆúµÄ¾É·½·¨-->
+<!--åºŸå¼ƒçš„æ—§æ–¹æ³•-->
 
 <!--<div class="main-container">-->
 <!--    <main class="main-content">-->
-<!--        <h1>²âÊÔÎÄ±¾²âÊÔÎÄ±¾</h1>-->
-<!--        <p>ÕâÊÇÒ»Ğ©²âÊÔÎÄ±¾ ¿´Ò»ÏÂÊµ¼ÊÕ¹Ê¾Ğ§¹û</p>-->
+<!--        <h1>æµ‹è¯•æ–‡æœ¬æµ‹è¯•æ–‡æœ¬</h1>-->
+<!--        <p>è¿™æ˜¯ä¸€äº›æµ‹è¯•æ–‡æœ¬ çœ‹ä¸€ä¸‹å®é™…å±•ç¤ºæ•ˆæœ</p>-->
 <!--    </main>-->
 
 <!--    <aside class="sidebar">-->
 <!--        <div class="sidebar-box">-->
-<!--            <h3>·ÇÒÅÖĞÒ½Ò©</h3>-->
-<!--            <p>ÖĞÒ½Ò©²»½öÊÇÖĞ¹úµÄ´«Í³ÖÇ»Û£¬¸üÊÇÊÀ½ç·ÇÎïÖÊÎÄ»¯ÒÅ²úµÄÖØÒª×é³É²¿·Ö¡£</p>-->
-<!--            <p>±¾¹İÖÂÁ¦ÓÚ´«³Ğ¡¢±£»¤ÓëÍÆ¹ãÖĞÒ½Ò©ÎÄ»¯£¬»¶Ó­ÄúµÄ²ÎÓëÓëÖ§³Ö¡£</p>-->
+<!--            <h3>éé—ä¸­åŒ»è¯</h3>-->
+<!--            <p>ä¸­åŒ»è¯ä¸ä»…æ˜¯ä¸­å›½çš„ä¼ ç»Ÿæ™ºæ…§ï¼Œæ›´æ˜¯ä¸–ç•Œéç‰©è´¨æ–‡åŒ–é—äº§çš„é‡è¦ç»„æˆéƒ¨åˆ†ã€‚</p>-->
+<!--            <p>æœ¬é¦†è‡´åŠ›äºä¼ æ‰¿ã€ä¿æŠ¤ä¸æ¨å¹¿ä¸­åŒ»è¯æ–‡åŒ–ï¼Œæ¬¢è¿æ‚¨çš„å‚ä¸ä¸æ”¯æŒã€‚</p>-->
 <!--        </div>-->
 <!--    </aside>-->
 <!--</div>-->
 </body>
 <script>
-    // µÈ´ı DOM ¼ÓÔØÍê³ÉºóÖ´ĞĞ
+    // ç­‰å¾… DOM åŠ è½½å®Œæˆåæ‰§è¡Œ
     document.addEventListener('DOMContentLoaded', function() {
-        // »ñÈ¡µ¼º½À¸ÖĞËùÓĞµÄÁ´½Ó
+        // è·å–å¯¼èˆªæ ä¸­æ‰€æœ‰çš„é“¾æ¥
         const navLinks = document.querySelectorAll();
 
-        // ±éÀúËùÓĞÁ´½Ó£¬Ìí¼Óµã»÷ÊÂ¼ş¼àÌı
+        // éå†æ‰€æœ‰é“¾æ¥ï¼Œæ·»åŠ ç‚¹å‡»äº‹ä»¶ç›‘å¬
         navLinks.forEach(link => {
             link.addEventListener('click', function(event) {
-                // ÅĞ¶Ïµ±Ç°Á´½ÓÊÇ·ñÎªÎŞĞ§Á´½Ó£¨href Îª "#" »ò¿Õ£©
+                // åˆ¤æ–­å½“å‰é“¾æ¥æ˜¯å¦ä¸ºæ— æ•ˆé“¾æ¥ï¼ˆhref ä¸º "#" æˆ–ç©ºï¼‰
                 const href = this.getAttribute('href');
                 if (href === '#' || !href) {
-                    // ×èÖ¹Ä¬ÈÏÌø×ªĞĞÎª£¨±ÜÃâÌø×ªµ½Ò³Ãæ¶¥²¿£©
+                    // é˜»æ­¢é»˜è®¤è·³è½¬è¡Œä¸ºï¼ˆé¿å…è·³è½¬åˆ°é¡µé¢é¡¶éƒ¨ï¼‰
                     event.preventDefault();
-                    // Ìø×ªµ½ 404 Ò³Ãæ£¨Â·¾¶¸ù¾İÊµ¼ÊÇé¿öµ÷Õû£©
+                    // è·³è½¬åˆ° 404 é¡µé¢ï¼ˆè·¯å¾„æ ¹æ®å®é™…æƒ…å†µè°ƒæ•´ï¼‰
                     window.location.href = '../index/404.html';
                 }
             });
         });
     });
 </script>
+
 </html>
