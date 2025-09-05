@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>非遗医药-清单</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        /* --- reset --- */
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{
+            font-family:"Noto Serif SC","Microsoft YaHei",sans-serif;
+            background:#fdfaf4;
+            color:#333;
+            line-height:1.6;
+        }
+        /* --- 导航样式 --- */
+        .tcm-nav{
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap:2rem;
+            padding:1.2rem 0;
+            background:#f5f2eb;
+            border-bottom:2px solid #4a7c59;   /* 医药绿 */
+            box-shadow:0 2px 5px rgba(0,0,0,.08);
+        }
+        .tcm-nav a,.tcm-nav .current{
+            display:flex;
+            align-items:center;
+            padding:.6rem 1.2rem;
+            border-radius:6px;
+            font-size:18px;
+            font-weight:700;
+            color:#2b5329;
+            text-decoration:none;
+            transition:background .3s,color .3s,transform .3s;
+        }
+        .tcm-nav a:hover{
+            background:#e2efe8;
+            transform:translateY(-3px);
+        }
+        .tcm-nav .current{
+            color:#fff;
+            background:#4a7c59;
+            cursor:default;
+            pointer-events:none;
+        }
+        .nav-home   ::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E");}
+        .nav-list   ::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z'/%3E%3C/svg%3E");}
+        .nav-pedia  ::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M5 4v16h7v-2H7V6h10v10h1v2h3V4H5z'/%3E%3C/svg%3E");}
+        .nav-feedback::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z'/%3E%3C/svg%3E");}
+        /* 当前页图标颜色 */
+        .tcm-nav .current::before{filter:invert(1);}
+
+        /* --- 清单内容样式 --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: #2b5329;
+            font-size: 2.2rem;
+            border-bottom: 2px solid #4a7c59;
+            padding-bottom: 1rem;
+        }
+
+        .medicine-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .medicine-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .medicine-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .medicine-info {
+            margin-bottom: 1rem;
+        }
+
+        .medicine-name {
+            font-size: 1.5rem;
+            color: #2b5329;
+            margin-bottom: 0.5rem;
+        }
+
+        .medicine-meta {
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .medicine-meta span {
+            display: inline-block;
+            margin-right: 1.5rem;
+        }
+
+        .medicine-image {
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .medicine-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .medicine-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* 响应式调整 */
+        @media(max-width:600px){
+            .tcm-nav{flex-direction:column;gap:.8rem;}
+            .container {
+                padding: 1rem;
+            }
+            .medicine-list {
+                grid-template-columns: 1fr;
+            }
+            .page-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="tcm-nav">
+    <a class="nav-home" href="../../index/index.html">首页</a>
+    <a class="nav-home" href="../med-index1.html"><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">医药首页</a>
+    <a class="current nav-list"><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">清单</a>
+    <a class="nav-pedia" href="../pedia/pedia.html"><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">知识库</a>
+    <a class="nav-feedback" href="../feedback/feedback_contact.html"><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">反馈</a>
+</nav>
+
+
+<!-- 清单页面内容 -->
+<div class="container">
+    <h1 class="page-title">国家级非物质文化遗产医药代表项目清单</h1>
+
+    <div class="medicine-list">
+        <!-- 项目1 -->
+        <div class="medicine-item" data-link = "../pedia/zhenjiu.html">
+            <div class="medicine-info">
+                <h3 class="medicine-name">中医针灸</h3>
+                <div class="medicine-meta">
+                    <span>年代：新石器时代</span>
+                    <span>发明者：不详</span>
+                </div>
+            </div>
+            <div class="medicine-image">
+                <img src="../../image/zhenjiu.jpg" alt="中医针灸">
+            </div>
+        </div>
+
+        <!-- 项目2 -->
+        <div class="medicine-item" data-link = "../pedia/tongrentang.html">
+            <div class="medicine-info">
+                <h3 class="medicine-name">同仁堂中医药文化</h3>
+                <div class="medicine-meta">
+                    <span>年代：清朝（1669年）</span>
+                    <span>发明者：乐显扬</span>
+                </div>
+            </div>
+            <div class="medicine-image">
+                <img src="../../image/tongrentang.jpg" alt="同仁堂中医药文化">
+                <a href="../pedia/zhenjiu.html"></a>
+            </div>
+        </div>
+
+        <!-- 项目3 -->
+        <div class="medicine-item" data-link = "../pedia/huyutang.html">
+            <div class="medicine-info">
+                <h3 class="medicine-name">胡庆余堂中药文化</h3>
+                <div class="medicine-meta">
+                    <span>年代：清朝（1874年）</span>
+                    <span>发明者：胡雪岩</span>
+                </div>
+            </div>
+            <div class="medicine-image">
+                <img src="../../image/huyutang.jpg" alt="胡庆余堂中药文化">
+            </div>
+        </div>
+
+
+        <!-- 项目5 -->
+        <div class="medicine-item" data-link = "../pedia/renzhi.html">
+            <div class="medicine-info">
+                <h3 class="medicine-name">中医生命与疾病认知方法</h3>
+                <div class="medicine-meta">
+                    <span>年代：未知</span>
+                    <span>发明者：古代智慧劳动人民</span>
+                </div>
+            </div>
+            <div class="medicine-image">
+                <a href="../feedback/feedback_contact.html"></a>
+                    <img src="../../image/zhongyizhenliao.webp" alt="佛慈制药技艺">
+            </div>
+        </div>
+
+        <!-- 项目6 -->
+        <div class="medicine-item" data-link="../pedia/zhenfa.html">
+            <div class="medicine-info">
+                <h3 class="medicine-name">中医诊法</h3>
+                <div class="medicine-meta">
+                    <span>年代：明朝（1555年）</span>
+                    <span>发明者：不详</span>
+                </div>
+            </div>
+            <div class="medicine-image">
+                <img src="../../image/zhongyizhenfa.webp" alt="片仔癀制作技艺">
+            </div>
+        </div>
+
+        <!-- 项目7 -->
+        <div class="medicine-item" data-link="../pedia/yunnanbaiyao.html">
+            <div class="medicine-info">
+                <h3 class="medicine-name">云南白药制作技艺</h3>
+                <div class="medicine-meta">
+                    <span>年代：民国（1902年）</span>
+                    <span>发明者：曲焕章</span>
+                </div>
+            </div>
+            <div class="medicine-image">
+                <img src="../../image/yunnanbaiyao.jpeg" alt="云南白药制作技艺">
+            </div>
+        </div>
+
+        <!-- 项目8 -->
+        <div class="medicine-item" data-link = "../pedia/ejiao.html">
+            <div class="medicine-info">
+                <h3 class="medicine-name">东阿阿胶制作技艺</h3>
+                <div class="medicine-meta">
+                    <span>年代：春秋战国</span>
+                    <span>发明者：不详</span>
+                </div>
+            </div>
+            <div class="medicine-image">
+                <img src="../../image/dongeejiao.webp" alt="东阿阿胶制作技艺">
+            </div>
+        </div>
+
+        <!-- 项目9 -->
+        <div class="medicine-item" data-link="angong.html">
+            <div class="medicine-info">
+                <h3 class="medicine-name">安宫牛黄丸制作技艺</h3>
+                <div class="medicine-meta">
+                    <span>年代：清朝（1798年）</span>
+                    <span>发明者：吴瑭</span>
+                </div>
+            </div>
+            <div class="medicine-image">
+                <img src="../../image/angongniuhuangwan.webp" alt="安宫牛黄丸制作技艺">
+            </div>
+        </div>
+
+        <!-- 项目10 -->
+        <div class="medicine-item" data-link = "chuantong.html">
+            <div class="medicine-info">
+                <h3 class="medicine-name">中医传统制剂方法</h3>
+                <div class="medicine-meta">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="medicine-image">
+                <img src="../../image/chuantongzhiji.png" alt="龟龄集制作技艺">
+            </div>
+        </div>
+
+<!--        &lt;!&ndash; 项目11 &ndash;&gt;-->
+<!--        <div class="medicine-item">-->
+<!--            <div class="medicine-info">-->
+<!--                <h3 class="medicine-name">太安堂中药文化</h3>-->
+<!--                <div class="medicine-meta">-->
+<!--                    <span>年代：明朝（1567年）</span>-->
+<!--                    <span>发明者：柯玉井</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="medicine-image">-->
+<!--                <img src="https://picsum.photos/id/247/600/400" alt="太安堂中药文化">-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; 项目12 &ndash;&gt;-->
+<!--        <div class="medicine-item">-->
+<!--            <a href="../pedia/chuantongwenhua.html"></a>-->
+<!--            <div class="medicine-info">-->
+<!--                <h3 class="medicine-name">陈李济传统中药文化</h3>-->
+<!--                <div class="medicine-meta">-->
+<!--                    <span>年代：明朝（1600年）</span>-->
+<!--                    <span>发明者：陈体全、李升佐</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="medicine-image">-->
+<!--                <img src="https://picsum.photos/id/248/600/400" alt="陈李济传统中药文化">-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; 项目13 &ndash;&gt;-->
+<!--        <div class="medicine-item">-->
+<!--            <div class="medicine-info">-->
+<!--                <h3 class="medicine-name">冯了性风湿跌打药酒</h3>-->
+<!--                <div class="medicine-meta">-->
+<!--                    <span>年代：明朝（1659年）</span>-->
+<!--                    <span>发明者：冯了性</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="medicine-image">-->
+<!--                <img src="https://picsum.photos/id/249/600/400" alt="冯了性风湿跌打药酒">-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; 项目14 &ndash;&gt;-->
+<!--        <div class="medicine-item">-->
+<!--            <div class="medicine-info">-->
+<!--                <h3 class="medicine-name">广誉远中医药文化</h3>-->
+<!--                <div class="medicine-meta">-->
+<!--                    <span>年代：明朝（1541年）</span>-->
+<!--                    <span>发明者：广盛号药店</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="medicine-image">-->
+<!--                <img src="https://picsum.photos/id/250/600/400" alt="广誉远中医药文化">-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; 项目15 &ndash;&gt;-->
+<!--        <div class="medicine-item">-->
+<!--            <div class="medicine-info">-->
+<!--                <h3 class="medicine-name">宏济堂传统中药文化</h3>-->
+<!--                <div class="medicine-meta">-->
+<!--                    <span>年代：民国（1907年）</span>-->
+<!--                    <span>发明者：乐镜宇</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="medicine-image">-->
+<!--                <img src="https://picsum.photos/id/251/600/400" alt="宏济堂传统中药文化">-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; 项目16 &ndash;&gt;-->
+<!--        <div class="medicine-item">-->
+<!--            <div class="medicine-info">-->
+<!--                <h3 class="medicine-name">鹤年堂中医药养生文化</h3>-->
+<!--                <div class="medicine-meta">-->
+<!--                    <span>年代：明朝（1405年）</span>-->
+<!--                    <span>发明者：丁鹤年</span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="medicine-image">-->
+<!--                <img src="https://picsum.photos/id/252/600/400" alt="鹤年堂中医药养生文化">-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+
+</body>
+<script>
+    // 等待 DOM 加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+        // 获取导航栏中所有的链接
+        const navLinks = document.querySelectorAll('.data-link');
+
+        // 遍历所有链接，添加点击事件监听
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                // 判断当前链接是否为无效链接（href 为 "#" 或空）
+                const href = this.getAttribute('href');
+                if (href === '#' || !href) {
+                    // 阻止默认跳转行为（避免跳转到页面顶部）
+                    event.preventDefault();
+                    // 跳转到 404 页面（路径根据实际情况调整
+                    window.location.href = '../index/404.html';
+                }
+            });
+        });
+    });
+    //页面跳转实现逻辑
+    document.addEventListener('DOMContentLoaded', function() {
+        // 获取所有medicine-item元素
+        const items = document.querySelectorAll('.medicine-item');
+
+        // 遍历并添加点击事件
+        items.forEach(item => {
+            item.addEventListener('click', function() {
+                // 从data-link属性获取目标链接
+                const targetLink = this.getAttribute('data-link');
+                if (targetLink) {
+                    // 跳转到目标链接
+                    window.location.href = targetLink;
+                }
+            });
+        });
+    });
+</script>
+</html>

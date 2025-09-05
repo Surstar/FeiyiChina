@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>中医针灸</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Noto Serif SC", "Microsoft YaHei", serif;
+            background: #fdfaf4;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .tcm-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            padding: 1.2rem 0;
+            background: #f5f2eb;
+            border-bottom: 2px solid #4a7c59;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .08);
+        }
+
+        .tcm-nav a {
+            padding: .6rem 1.2rem;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #2b5329;
+            text-decoration: none;
+            transition: background .3s, color .3s, transform .3s;
+        }
+
+        .tcm-nav a:hover {
+            background: #e2efe8;
+            transform: translateY(-3px);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, .05);
+        }
+
+        .project-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-image {
+            flex: 0 0 auto;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, .1);
+        }
+
+        .project-image img {
+            width: auto;
+            height: 100%;
+            display: block;
+            transition: transform .5s ease;
+        }
+
+        .project-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            flex: 2 1 400px;
+        }
+
+        .project-title {
+            font-size: 2rem;
+            color: #2b5329;
+            margin-bottom: .5rem;
+        }
+
+        .project-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section h3 {
+            font-size: 1.2rem;
+            color: #4a7c59;
+            margin-bottom: .5rem;
+            border-left: 4px solid #4a7c59;
+            padding-left: .5rem;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: .6rem 1.2rem;
+            background: #4a7c59;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: background .3s;
+        }
+
+        .back-link:hover {
+            background: #2b5329;
+        }
+
+        @media(max-width:600px) {
+            .project-header {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="tcm-nav">
+        <a href="../../index/index.html">首页</a>
+        <a href="../med-index1.html">医药主页</a>
+        <a href="../list/list.html">名录</a>
+        <a href="pedia.html">知识库</a>
+        <a href="../feedback/feedback_contact.html">反馈</a>
+    </nav>
+    <div class="container">
+        <div class="project-header">
+            <div class="project-image">
+                <img src="../../image/zhenjiu.jpg" alt="中医针灸">
+            </div>
+            <div class="project-info">
+                <h1 class="project-title">中医针灸</h1>
+                <p class="project-subtitle">起源：新石器时代 | 传承人：中华民族集体智慧</p>
+                <div class="section">
+                    <h3>历史渊源</h3>
+                    <p>针灸发源于原始社会的砭石，是中医最早的外治技术。《黄帝内经》奠定理论基础，北宋王惟一铸针灸铜人，使取穴标准化。</p>
+                </div>
+                <div class="section">
+                    <h3>文化特色</h3>
+                    <p>以经络学说为核心，讲究“得气”与“补泻”。工具从砭石、骨针到现代一次性不锈钢针，演进历程清晰可见。</p>
+                </div>
+                <div class="section">
+                    <h3>传承价值</h3>
+                    <p>2010 年入选联合国非遗名录，成为世界认知中国养生文化的重要窗口，具有全球共享的医学与人文价值。</p>
+                </div>
+            </div>
+        </div>
+        <a class="back-link" href="../list/list.html">← 返回名录</a>
+    </div>
+</body>
+
+</html>
