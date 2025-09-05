@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>非遗中国 · 传统之美</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- 思源黑体 + 小篆字体 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/xfoot.css">
+<style>
+
+/* 基础重置 */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    background:#fdfaf4 url('data:image/svg+xml;utf8,\
+    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" opacity=".05">\
+      <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".9"/></filter>\
+      <rect width="100%" height="100%" filter="url(%23noise)" fill="%23000"/>\
+    </svg>');
+    font-family:"Noto Serif SC","Microsoft YaHei",sans-serif;
+    color:#2a2a2a;
+}
+
+/* ===== 非遗导航栏 ===== */
+nav.heritage-nav{
+    background:#f5f2eb;
+    border-bottom:2px solid #a02c2c;
+    box-shadow:0 2px 5px rgba(0,0,0,.1);
+}
+nav.heritage-nav ul{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    list-style:none;
+    padding:.8rem 0;
+}
+nav.heritage-nav li{
+    position:relative;
+    margin:0 1.2rem;
+}
+
+/* 链接样式 */
+nav.heritage-nav a{
+    display:inline-flex;
+    align-items:center;
+    color:#1e3a8a;
+    font-size:20px;
+    font-weight:700;
+    text-decoration:none;
+    padding:.3rem .6rem;
+    transition:color .3s;
+}
+nav.heritage-nav a:hover{
+    color:#a02c2c;
+}
+/* 篆刻图标 */
+nav.heritage-nav a::before{
+    content:'';
+    display:inline-block;
+    width:28px;
+    height:28px;
+    margin-right:.4rem;
+    background:url('data:image/svg+xml;utf8,\
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+      <rect width="100" height="100" fill="%23a02c2c"/>\
+      <text x="50" y="62" text-anchor="middle" fill="%23fff" font-size="38" font-family="serif">传</text>\
+    </svg>') center/contain no-repeat;
+}
+nav.heritage-nav a[aria-current="page"]{
+    color:#a02c2c;
+    cursor:default;
+    pointer-events:none; /* 彻底禁用点击 */
+}
+/* ====== 底部束状条吸附动画 ====== */
+.xfooter .slot{
+    display:flex;
+    justify-content:center;
+    align-items:flex-end;
+    gap:6px;
+    height:100px;
+    overflow:hidden;
+}
+
+.xfooter .slot-track{
+    position:relative;
+    width:12px;
+    height:100%;
+    cursor:pointer;
+}
+
+.xfooter .slot-item{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;                /* 初始贴底 */
+    background:#a02c2c;      /* 与导航同色，可见 */
+    border-radius:6px 6px 0 0;
+    min-height:20px;         /* 保证至少能看见 */
+    transition:all .4s cubic-bezier(.25,.8,.25,1);
+}
+
+/* 鼠标靠近→吸到顶部并拉长 */
+.xfooter .slot-track:hover .slot-item{
+    top:0;
+    bottom:100%;             /* 瞬间“长高”到顶 */
+}
+/* ================== 彩条自适应 + 吸底 ================== */
+:root{
+    --slot-color:#a02c2c;   /* 全局统一色，可一键换色 */
+    --slot-height:130px;    /* 彩条整体高度 */
+    --slot-gap:0px;         /* 条间距 */
+}
+
+/* 彩条容器：固定在最底部，宽度 100% */
+.xfooter{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    height:var(--slot-height);
+    pointer-events:none;    /* 避免遮挡页面点击，如不需要可删 */
+    z-index:999;
+}
+
+.xfooter .slot{
+    display:flex;
+    align-items:flex-end;
+    height:100%;
+    gap:var(--slot-gap);
+    padding:0 var(--slot-gap); /* 左右留一点空隙 */
+}
+
+.xfooter .slot-track{
+    flex:1 1 0;              /* 等分剩余空间，随窗口自动伸缩 */
+    position:relative;
+    height:100%;
+    pointer-events:auto;     /* 让 hover 有效 */
+}
+
+.xfooter .slot-item{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    background:var(--slot-color);
+    border-radius:6px 6px 0 0;
+    min-height:20px;         /* 保证极限缩放也不消失 */
+    transition:all .4s cubic-bezier(.25,.8,.25,1);
+}
+
+/* 鼠标悬停→吸顶 */
+.xfooter .slot-track:hover .slot-item{
+    top:0;
+    bottom:100%;
+}
+
+/* 页面主体加 padding，防止内容被彩条遮挡 */
+body{
+    padding-bottom:var(--slot-height);
+}
+/* ========= 贴图彩条（自适应 + 吸底） ========= */
+:root{
+    --slot-height: 130px;          /* 整体可见高度 */
+    --slot-gap: 0px;                /* 条间距 */
+    --slot-zoom: 1.15;              /* 悬停时轻微放大 */
+}
+
+/* 底部固定容器 */
+.xfooter{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--slot-height);
+    z-index: 999;
+    pointer-events: none;          /* 不挡点击 */
+}
+
+.xfooter .slot{
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    gap: var(--slot-gap);
+    padding: 0 var(--slot-gap);
+}
+
+.xfooter .slot-track{
+    flex: 1 1 0;                    /* 等分宽度，自动伸缩 */
+    position: relative;
+    height: 100%;
+    pointer-events: auto;
+    overflow: hidden;               /* 关键：隐藏溢出部分 */
+    border-radius: 6px 6px 0 0;
+}
+
+.xfooter .slot-item{
+    position: absolute;
+    left: 0;
+    top: 0;                         /* 整张图先藏在底部 */
+    width: 100%;
+    height: 100%;                   /* 先占满容器，背景图会自动撑开 */
+    background: center top / 100% auto no-repeat;
+    transition: transform .4s cubic-bezier(.25,.8,.25,1);
+}
+
+/* 逐条贴图 */
+
+
+/* 悬停：向上抽出 + 轻微放大 */
+.xfooter .slot-track:hover .slot-item{
+    transform: translateY(-3%) scale(var(--slot-zoom));
+    /*  -100% 刚好把整张图抽出来  */
+}
+
+/* 页面主体留空，不被遮挡 */
+body{
+    padding-bottom: var(--slot-height);
+}
+.xfooter .slot-item{
+    background-image:url(../image/slot/slot22.png);/*some problem*/
+    background-size:auto 100%;   /* 图高=条高，宽度等比缩放 */
+    background-position:center top;
+    background-repeat:no-repeat;
+    transform: translateY(100%) scale(var(--slot-zoom));                 /* 先写死，能看到图再说 */
+}
+</style>
+</head>
+
+<body>
+<nav class="heritage-nav">
+  <ul>
+	<li><a aria-current="page">首页</a></li>
+    <li><a href="../Medical/med-index1.html">传统医药</a></li>
+    <li><a href="#">传统艺术</a></li>
+    <li><a href="#">传统舞蹈</a></li>
+    <li><a href="#">传统体育活动</a></li>
+  </ul>
+</nav>
+<div class="xfooter">
+
+    <div class="slot">
+        <div class="slot-track">
+            <div class="slot-item s1"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s2"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s3"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s4"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s5"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s6"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s7"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s8"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s9"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s10"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s11"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s12"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s13"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s14"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s15"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s16"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s17"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s18"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s19"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s20"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s21"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 其余页面内容 -->
+</body>
+<!-- 放在 </body> 标签前 -->
+<script>
+    // 等待 DOM 加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+        // 获取导航栏中所有的链接
+        const navLinks = document.querySelectorAll('.heritage-nav a');
+
+        // 遍历所有链接，添加点击事件监听
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                // 判断当前链接是否为无效链接（href 为 "#" 或空）
+                const href = this.getAttribute('href');
+                if (href === '#' || !href) {
+                    // 阻止默认跳转行为（避免跳转到页面顶部）
+                    event.preventDefault();
+                    // 跳转到 404 页面（路径根据实际情况调整）
+                    window.location.href = '../index/404.html';
+                }
+            });
+        });
+    });
+</script>
+</html>
