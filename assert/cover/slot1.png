@@ -1,0 +1,14 @@
+@echo off
+setlocal enabledelayedexpansion
+
+:: 计数器从 1 开始
+set /a n=1
+
+:: 遍历当前目录下所有文件
+for %%f in (*.*) do (
+    ren "%%f" "slot!n!.png"
+    set /a n+=1
+)
+
+echo 全部重命名完成！
+pause

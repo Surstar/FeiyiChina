@@ -1,0 +1,74 @@
+/*private Navbar Components*/
+
+:root{
+    --nav-bg: #f5f2eb;
+    --nav-border: #4a7c59;
+    --nav-text: #2b5329;
+    --nav-current-bg: #4a7c59;
+    --nav-current-text: #fff;
+    --nav-hover-bg: #e2efe8;
+    --nav-icon-size: 24px;
+    --nav-gap: 2rem;
+    --nav-padding-y: 1.2rem;
+    --nav-radius: 6px;
+    --nav-trans: .3s;
+}
+
+/* 重置 Flex 容器 */
+.navbar{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:var(--nav-gap);
+    padding:var(--nav-padding-y) 0;
+    background:var(--nav-bg);
+    border-bottom:2px solid var(--nav-border);
+    box-shadow:0 2px 5px rgba(0,0,0,.08);
+}
+
+/* 链接基础样式 */
+.navbar__item{
+    display:inline-flex;
+    align-items:center;
+    padding:.6rem 1.2rem;
+    border-radius:var(--nav-radius);
+    font-size:18px;
+    font-weight:700;
+    color:var(--nav-text);
+    text-decoration:none;
+    transition:background var(--nav-trans), color var(--nav-trans), transform var(--nav-trans);
+}
+
+/* 悬停效果 */
+.navbar__item:hover{
+    background:var(--nav-hover-bg);
+    transform:translateY(-3px);
+}
+
+/* 当前页高亮 */
+.navbar__item--current{
+    color:var(--nav-current-text);
+    background:var(--nav-current-bg);
+    cursor:default;
+    pointer-events:none;
+}
+
+/* 图标（::before） */
+.navbar__item::before{
+    content:'';
+    width:var(--nav-icon-size);
+    height:var(--nav-icon-size);
+    margin-right:.5rem;       /* 只留右侧空隙，左侧无空白 */
+    flex-shrink:0;
+    background:center/contain no-repeat;
+}
+
+/* 图标颜色随文字变 */
+.navbar__item--current::before{
+    filter:invert(1);          /* 反白 */
+}
+
+/* 响应式：手机垂直排 */
+@media(max-width:600px){
+    .navbar{flex-direction:column;gap:.8rem;}
+}
