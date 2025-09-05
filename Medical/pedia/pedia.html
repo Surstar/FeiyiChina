@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="gb2312">
+<title>非遗医药-百科</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+/* --- reset --- */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:"Noto Serif SC","Microsoft YaHei",sans-serif;
+  background:#fdfaf4;
+}
+/* --- 中药导航栏 --- */
+.tcm-nav{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:2rem;
+  padding:1.2rem 0;
+  background:#f5f2eb;
+  border-bottom:2px solid #4a7c59;   /* 草药绿 */
+  box-shadow:0 2px 5px rgba(0,0,0,.08);
+}
+.tcm-nav a,.tcm-nav .current{
+  display:flex;
+  align-items:center;
+  padding:.6rem 1.2rem;
+  border-radius:6px;
+  font-size:18px;
+  font-weight:700;
+  color:#2b5329;
+  text-decoration:none;
+  transition:background .3s,color .3s,transform .3s;
+}
+.tcm-nav a:hover{
+  background:#e2efe8;
+  transform:translateY(-3px);
+}
+.tcm-nav .current{
+  color:#fff;
+  background:#4a7c59;
+  cursor:default;
+  pointer-events:none;
+}
+
+.nav-home   ::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E");}
+.nav-list   ::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z'/%3E%3C/svg%3E");}
+.nav-pedia  ::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M5 4v16h7v-2H7V6h10v10h1v2h3V4H5z'/%3E%3C/svg%3E");}
+.nav-feedback::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z'/%3E%3C/svg%3E");}
+/* 当前页图标反白 */
+.tcm-nav .current::before{filter:invert(1);}
+/* 响应式 */
+@media(max-width:600px){
+  .tcm-nav{flex-direction:column;gap:.8rem;}
+}
+</style>
+</head>
+<body>
+
+<nav class="tcm-nav">
+  <a class="nav-home"  href="../../index/index.html">非遗中国</span>
+  <a class="nav-home"  href="../med-index1.html"><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">首页</span>
+  <a class="nav-list"   href="../list/list.html"><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">清单</a>
+  <a class="current nav-pedia" ><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">百科</a>
+  <a class="nav-feedback"  href="../feedback/feedback_contact.html"><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">反馈</a></nav>
+
+
+<!-- 其余页面内容 -->
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="gb2312">
+<title>非遗医药-首页</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+/* --- reset --- */
+*{margin:0;padding:0;box-sizing:border-box;}
+@font-face {
+    font-family: 'fzqkys';
+    src: url('font/fzqkys.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    @font-face {
+        font-family: 'fzqkys';
+        src: url('font/fzqkys.TTF') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+  font-family:"Noto Serif SC","Microsoft YaHei",sans-serif,'fzqkys';
+  background:#fdfaf4;
+}
+/* --- 中药导航栏 --- */
+.tcm-nav{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:2rem;
+  padding:19.2px 0;
+  background:#f5f2eb;
+  border-bottom:2px solid #4a7c59;   /* 草药绿 */
+  box-shadow:0 2px 5px rgba(0,0,0,.08);
+}
+.tcm-nav a,.tcm-nav .current{
+  display:flex;
+  align-items:center;
+  padding:.6rem 1.2rem;
+  border-radius:6px;
+  font-size:18px;
+  font-weight:700;
+  color:#2b5329;
+  text-decoration:none;
+  transition:background .3s,color .3s,transform .3s;
+}
+.tcm-nav a:hover{
+  background:#e2efe8;
+  transform:translateY(-3px);
+}
+.tcm-nav .current{
+  color:#fff;
+  background:#4a7c59;
+  cursor:default;
+  pointer-events:none;
+}
+.nav-home   ::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E");}
+.nav-list   ::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z'/%3E%3C/svg%3E");}
+.nav-pedia  ::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M5 4v16h7v-2H7V6h10v10h1v2h3V4H5z'/%3E%3C/svg%3E");}
+.nav-feedback::before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234a7c59'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z'/%3E%3C/svg%3E");}
+/* 当前页图标反白 */
+.tcm-nav .current::before{filter:invert(1);}
+/* 响应式 */
+@media(max-width:600px){
+  .tcm-nav{flex-direction:column;gap:.8rem;}
+}
+.main-container {
+    align-items: center;
+    display: flex;
+    max-width: 1200px;
+    margin: 2rem auto;
+    gap: 2rem;
+    padding: 0 1rem;
+}
+
+.main-content {
+    flex: 3;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,.05);
+}
+
+.sidebar {
+    flex: 1;
+}
+
+.sidebar-box {
+    align-items: center;
+    background: #f9f6f1;
+    border-left: 4px solid #4a7c59;
+    padding: 1.2rem;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,.05);
+}
+
+.sidebar-box h3 {
+    margin-bottom: 0.6rem;
+    font-size: 18px;
+    color: #2b5329;
+}
+/* 图片容器：横向排列 */
+.image-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+}
+
+/* 每个图片包装器：相对定位，用于遮罩 */
+.image-wrapper {
+    position: relative;
+    flex: 1;
+    max-width: 480px;
+}
+
+/* 图片样式 */
+.image-wrapper img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+}
+
+/* 遮罩层 */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* 半透明黑色 */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 8px;
+    pointer-events: none; /* 不影响点击图片 */
+}
+/* 全宽横幅容器 */
+.full-width-banner {
+    display: flex;
+    width: 100vw;          /* 视口宽度 */
+    height: 100vh;          /* 视口高度一半，可自行调整 */
+    overflow: hidden;
+}
+
+/* 每个图片块 */
+.banner-item {
+    position: relative;
+    flex: 1;
+    height: 100%;
+}
+
+/* 图片样式：铺满容器 */
+.banner-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;     /* 裁剪填满，不变形 */
+    display: block;
+}
+
+/* 遮罩层 */
+.overlay {
+    position: absolute;
+    inset: 0;              /* 等价于 top:0; left:0; right:0; bottom:0; */
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: bold;
+    pointer-events: none;
+}
+/* 容器：纵向居中 */
+.title-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0; /* 无间隙 */
+}
+
+/* 标题本身 */
+/*.decorated-title {*/
+/*    position: relative;*/
+/*    margin: 0;*/
+/*    padding: 80px 0; !* 上下留出图形空间，与图形同高 *!*/
+/*    font-size: 5rem;*/
+/*    color: #2b5329;*/
+/*}*/
+
+/* ========= 中央透明容器 ========= */
+.banner-item:last-of-type {          /* 仅作用于右侧图片 */
+    position: relative;                /* 给子元素绝对定位参考 */
+}
+
+.center-box {
+    position: absolute;
+    inset: 0;                          /* 上下左右全 0，完全居中 */
+    margin: auto;                      /* 关键：自动居中 */
+    width: 800px;
+    height: 150px;
+    background: none; /* 半透明白纸 */
+
+    border-radius: 8px;
+    box-shadow:none;
+    display: flex;
+    align-items: center;               /* 垂直居中 */
+    gap: 20px;
+    padding: 0 20px;
+    pointer-events: none;              /* 默认不挡图片点击 */
+}
+
+/* 让内部元素可点击 */
+.side-title,
+.side-menu {
+    pointer-events: auto;
+}
+
+/* ========= 左侧标题 ========= */
+.side-title {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.decorated-title {
+    writing-mode: vertical-rl;         /* 竖排文字 */
+    font-size: 50px;
+    color: #ffffff;
+    letter-spacing: 6px;
+    position: relative;
+    font-family: fzqkys;
+    padding: 30px 30px;
+    font-family: "Noto Serif SC", "Microsoft YaHei", sans-serif;
+}
+
+/* 上图形 */
+.decorated-title::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 11px;
+    background: url("image/wrapper.png") no-repeat top;
+    background-size: 64px 22px;
+}
+
+/* 下图形 */
+.decorated-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 11px;
+    background: url("image/wrapper.png") no-repeat bottom;
+    background-size: 64px 22px;
+}
+
+/* ========= 右侧菜单 ========= */
+.side-menu {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* 确保菜单项竖向排列 */
+    gap: 10px; /* 调整菜单项之间的间距 */
+    padding-left: 20px; /* 为菜单项添加左边距，使其与标题对齐 */
+    writing-mode: vertical-lr; /* 设置文字为竖向排列 */
+    text-orientation: mixed; /* 保持字母和数字正常显示 */
+}
+
+.side-menu a {
+    font-size: 26px;
+    color: #4a7c59;
+    text-decoration: none;
+    transition: color .3s;
+    letter-spacing: 8px;
+    display: flex;
+    align-items: center; /* 垂直居中对齐文本 */
+    writing-mode: vertical-lr; /* 继承父级设置 */
+    text-orientation: mixed; /* 继承父级设置 */
+    padding: 5px 0; /* 添加上下内边距 */
+    font-family: "Noto Serif SC", "Microsoft YaHei", sans-serif;
+}
+
+.side-menu a:hover {
+    color: #2b5329;
+}
+</style>
+</head>
+<body>
+
+<nav class="tcm-nav">
+  <a class="nav-home"  href="../index/index.html">非遗中国</span>
+  <a class="current nav-home" href="../index/index.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">首页</span>
+  <a class="nav-list"   href="list/list.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">清单</a>
+  <a class="nav-pedia"  href="pedia/pedia.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">百科</a>
+  <a class="nav-feedback" href="feedback/feedback_contact.html"><img src="../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">反馈</a></nav>
+<!-- 全宽图片横幅 -->
+<div class="full-width-banner">
+    <div class="banner-item">
+        <img src="../image/chayuan.jpg" alt="茶园">
+        <div class="overlay"></div>
+    </div>
+    <div class="banner-item">
+        <img src="../image/beijing.jpg" alt="背景">
+        <div class="overlay"></div>
+        <!-- 右侧图片内部中央容器 -->
+        <div class="center-box">
+            <!-- 左侧标题区 -->
+            <div class="side-title">
+                <b class="decorated-title">非遗医药</b>
+            </div>
+
+            <!-- 右侧菜单区 -->
+            <nav class="side-menu">
+                <a href="list/list.html"> 清单</a>
+                <a href="pedia/pedia.html"> 百科</a>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<!--<div class="image-container">-->
+<!--    <div class="image-wrapper">-->
+<!--        <img src="../image/chayuan.jpg" alt="chayuan">-->
+<!--        <div class="image-overlay">chayuan</div>-->
+<!--    </div>-->
+<!--    <div class="image-wrapper">-->
+<!--        <img src="../image/beijing.jpg" alt="beijing">-->
+<!--        <div class="overlay">beijing</div>-->
+<!--    </div>-->
+
+<!--</div>-->
+<!--废弃的旧方法-->
+
+<!--<div class="main-container">-->
+<!--    <main class="main-content">-->
+<!--        <h1>测试文本测试文本</h1>-->
+<!--        <p>这是一些测试文本 看一下实际展示效果</p>-->
+<!--    </main>-->
+
+<!--    <aside class="sidebar">-->
+<!--        <div class="sidebar-box">-->
+<!--            <h3>非遗中医药</h3>-->
+<!--            <p>中医药不仅是中国的传统智慧，更是世界非物质文化遗产的重要组成部分。</p>-->
+<!--            <p>本馆致力于传承、保护与推广中医药文化，欢迎您的参与与支持。</p>-->
+<!--        </div>-->
+<!--    </aside>-->
+<!--</div>-->
+</body>
+<script>
+    // 等待 DOM 加载完成后执行
+    document.addEventListener('DOMContentLoaded', function() {
+        // 获取导航栏中所有的链接
+        const navLinks = document.querySelectorAll();
+
+        // 遍历所有链接，添加点击事件监听
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                // 判断当前链接是否为无效链接（href 为 "#" 或空）
+                const href = this.getAttribute('href');
+                if (href === '#' || !href) {
+                    // 阻止默认跳转行为（避免跳转到页面顶部）
+                    event.preventDefault();
+                    // 跳转到 404 页面（路径根据实际情况调整）
+                    window.location.href = '../index/404.html';
+                }
+            });
+        });
+    });
+</script>
+</html>
