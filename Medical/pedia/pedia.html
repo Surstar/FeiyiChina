@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns:https="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <title>非遗医药-百科</title>
@@ -54,18 +54,105 @@ body{
 @media(max-width:600px){
   .tcm-nav{flex-direction:column;gap:.8rem;}
 }
+.tcm-search{
+    margin: 0 auto;          /* 让搜索块靠右 */
+    display:flex;
+    align-items:center;
+    background:#fff;
+    border:2px solid #4a7c59;  /* 草药绿边框 */
+    border-radius:20px;
+    overflow:hidden;
+    width:60vw;               /* 默认宽度 */
+    height: 4vh;
+    transition:width .3s;
+    position: fixed;
+    top:50vh;
+    left: 50vw;
+    transform:translate(-50%,-50%);
+    z-index:999;
+}
+.tcm-search input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:6px 12px;
+    font-size:15px;
+    color:#2b5329;
+    background:transparent;
+}
+.tcm-search button{
+    /*width:34px;height:34px;*/
+    width:auto;
+    height:100%;
+    padding: 0 10px;
+    border:none;
+    background:#4a7c59;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+}
+.tcm-search button svg{
+    width:20px;height:20px;
+    fill:#fff;
+}
+/* 聚焦时搜索框变宽 */
+.tcm-search:focus-within{
+    width:320px;
+}
+
+/* 移动端自动撑满 */
+@media(max-width:600px){
+    .tcm-search{
+        width:100%;
+        margin:8px 0 0 0;
+    }
+    .tcm-search:focus-within{
+        width:100%;
+    }
+}
 </style>
 </head>
 <body>
 
+<!-- 1. 把下面整段 <nav> 直接替换原来的 <nav class="tcm-nav">…</nav> -->
 <nav class="tcm-nav">
-  <a class="nav-home"  href="../../index/index.html">非遗中国</span>
-  <a class="nav-home"  href="../med-index1.html"><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">首页</span>
-  <a class="nav-list"   href="../list/list.html"><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">清单</a>
-  <a class="current nav-pedia" ><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">百科</a>
-  <a class="nav-feedback"  href="../feedback/feedback_contact.html"><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">反馈</a></nav>
+    <!-- 左侧原有导航 START -->
+    <a class="nav-home"  href="../../index/index.html">非遗中国</a>
+    <a class="nav-home"  href="../med-index1.html">
+        <img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="middle" style="margin-right:8px; vertical-align:middle;">首页
+    </a>
+    <a class="nav-list"   href="../list/list.html">
+        <img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="middle" style="margin-right:8px; vertical-align:middle;">清单
+    </a>
+    <a class="current nav-pedia">
+        <img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="middle" style="margin-right:8px; vertical-align:middle;">百科
+    </a>
+    <a class="nav-feedback"  href="../feedback/feedback_contact.html">
+        <img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="middle" style="margin-right:8px; vertical-align:middle;">反馈
+    </a>
+    <!-- 左侧原有导航 END -->
 
+
+</nav>
+<form class="tcm-search tcm-search-center" onsubmit="openBaike(event)">
+    <input id="kw" type="text" placeholder="搜索药材、功效、典籍…" required>
+    <button type="submit"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></button>
+</form>
 
 <!-- 其余页面内容 -->
 </body>
+<script>
+    function openBaike(e){
+        e.preventDefault();                 // ① 阻止表单默认提交
+        const k = document.getElementById('kw').value.trim();
+        if(!k) return;
+        // ② 百度百科词条页 URL 规则：首字母大写 + 空格变下划线
+        const title = k.charAt(0).toUpperCase() + k.slice(1).replace(/\s+/g,'_');
+        const url = 'https://baike.baidu.com/item/' + encodeURIComponent(title);
+        // ③ 先尝试直达词条页；若 404 则退到搜索结果页
+        fetch(url,{method:'HEAD',mode:'no-cors'})
+            .then(() => window.open(url,'_blank'))
+            .catch(() => window.open('https://baike.baidu.com/search?word=' + encodeURIComponent(k),'_blank'));
+    }
+</script>
 </html>
