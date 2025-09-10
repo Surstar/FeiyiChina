@@ -64,7 +64,63 @@ body{
   <a class="nav-list"   href="../list/list.html"><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">清单</a>
   <a class="nav-pedia"  href="../pedia/pedia.html"><img src="../../assert/medical-image/herbicon.png"" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">百科</a>
   <a class="current nav-feedback" ><img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">反馈</a></nav>
+<!-- ====== 反馈区域 ====== -->
+<section style="max-width:680px;margin:2rem auto;padding:0 1rem;">
+    <h2 style="color:#2b5329;margin-bottom:.6rem;">意见反馈</h2>
+    <textarea id="fbText" rows="6" style="width:100%;padding:.6rem;border:2px solid #4a7c59;border-radius:6px;font-size:16px;resize:vertical;" placeholder="请留下您的建议或药材纠错…"></textarea>
+    <button id="fbBtn" style="margin-top:.8rem;padding:.6rem 1.4rem;background:#4a7c59;color:#fff;border:none;border-radius:6px;font-size:16px;cursor:pointer;">提交反馈</button>
+</section>
 
+<script>
+    /* ========== 配置 ========== */
+    const TOKEN   = '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'; // ① 换成你的 Token
+    const OWNER   = 'surstar_auto';                                        // ②
+    const REPO    = 'FeiyiChina';                                        // ③
+    const PATH    = 'feedback.json';                                   // ④ 同目录文件名
+    const BRANCH  = 'main';                                            // 分支
+
+    /* ========== 提交函数 ========== */
+    async function pushFeedback(txt){
+        // 1. 获取当前文件 SHA 和内容
+        const getRes = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}?ref=${BRANCH}`,{
+            headers:{Accept:'application/vnd.github+json'}
+        });
+        if(!getRes.ok) throw new Error('网络错误或文件不存在');
+        const {sha, content} = await getRes.json();
+        const arr = JSON.parse(atob(content));        // base64 → 数组
+        arr.push(txt);                                // 追加新反馈
+
+        // 2. 推回仓库
+        const putBody = {
+            message:`Add feedback from web ${new Date().toISOString()}`,
+            content: btoa(JSON.stringify(arr, null, 2)), // 新内容 → base64
+            sha,
+            branch: BRANCH
+        };
+        const putRes = await fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${PATH}`,{
+            method:'PUT',
+            headers:{
+                'Authorization':'Bearer '+TOKEN,
+                'Accept':'application/vnd.github+json',
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify(putBody)
+        });
+        if(!putRes.ok) throw new Error('提交失败');
+        alert('感谢反馈！已记录到 GitHub');
+    }
+
+    /* ========== 绑定按钮 ========== */
+    document.getElementById('fbBtn').addEventListener('click', ()=>{
+        const v = document.getElementById('fbText').value.trim();
+        if(!v) return alert('内容不能为空');
+        document.getElementById('fbBtn').disabled = true;
+        pushFeedback(v)
+            .catch(err=>{ alert(err); })
+            .finally(()=>{ document.getElementById('fbBtn').disabled = false; });
+    });
+
+</script>
 <!-- 其余页面内容 -->
 </body>
 </html>
