@@ -1,79 +1,642 @@
-<!-- 1. 把下面整段 <nav> 直接替换原来的 <nav class="tcm-nav">…</nav> -->
-<nav class="tcm-nav">
-    <!-- 左侧原有导航 START -->
-    <a class="nav-home"  href="../../index/index.html">非遗中国</a>
-    <a class="nav-home"  href="../med-index1.html">
-        <img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">首页
-    </a>
-    <a class="nav-list"   href="../list/list.html">
-        <img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">清单
-    </a>
-    <a class="current nav-pedia">
-        <img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">百科
-    </a>
-    <a class="nav-feedback"  href="../feedback/feedback_contact.html">
-        <img src="../../assert/medical-image/herbicon.png" width="26" height="26" border="0" align="absmiddle" style="margin-right:8px; vertical-align:middle;">反馈
-    </a>
-    <!-- 左侧原有导航 END -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>非遗中国 · 传统之美</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- 2. 新增搜索区域 START -->
-    <form class="tcm-search" action="../search/search-result.html" method="get" autocomplete="off">
-        <input type="text" name="q" placeholder="搜索药材、功效、典籍…" required>
-        <button type="submit" aria-label="搜索">
-            <!-- 放大镜 svg -->
-            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-        </button>
-    </form>
-    <!-- 新增搜索区域 END -->
+<!-- 字体引入 -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/xfoot.css">
+<style>
+/* 基础重置 */
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+    background:#fdfaf4 url('data:image/svg+xml;utf8,\
+    <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" opacity=".05">\
+      <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".9"/></filter>\
+      <rect width="100%" height="100%" filter="url(%23noise)" fill="%23000"/>\
+    </svg>');
+    font-family:"Noto Serif SC","Microsoft YaHei",sans-serif;
+    color:#2a2a2a;
+    padding-bottom:var(--slot-height);
+}
+
+/* 顶部banner */
+.header-banner {
+    width: 100%;
+    height: 400px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.banner-slider {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.banner-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+    background-size: cover;
+    background-position: center;
+}
+
+.banner-slide.active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.banner-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 40px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: white;
+    z-index: 2;
+}
+
+.banner-title {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.banner-desc {
+    font-size: 16px;
+    max-width: 800px;
+}
+
+/* 导航栏优化 */
+nav.heritage-nav{
+    background:#f5f2eb;
+    border-bottom:2px solid #a02c2c;
+    box-shadow:0 2px 5px rgba(0,0,0,.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+nav.heritage-nav ul{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    list-style:none;
+    padding:.8rem 0;
+    flex-wrap: wrap;
+}
+nav.heritage-nav li{
+    position:relative;
+    margin:0 1.2rem;
+}
+
+nav.heritage-nav a{
+    display:inline-flex;
+    align-items:center;
+    color:#1e3a8a;
+    font-size:20px;
+    font-weight:700;
+    text-decoration:none;
+    padding:.3rem .6rem;
+    transition:color .3s;
+}
+nav.heritage-nav a:hover{
+    color:#a02c2c;
+}
+
+nav.heritage-nav a::before{
+    content:'';
+    display:inline-block;
+    width:28px;
+    height:28px;
+    margin-right:.4rem;
+    background:url('data:image/svg+xml;utf8,\
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+      <rect width="100" height="100" fill="%23a02c2c"/>\
+      <text x="50" y="62" text-anchor="middle" fill="%23fff" font-size="38" font-family="serif">传</text>\
+    </svg>') center/contain no-repeat;
+}
+nav.heritage-nav a[aria-current="page"]{
+    color:#a02c2c;
+    cursor:default;
+    pointer-events:none;
+}
+
+/* 主要内容区 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 28px;
+    color: #a02c2c;
+    border-bottom: 2px solid #a02c2c;
+    padding-bottom: 10px;
+    margin: 40px 0 20px;
+    display: flex;
+    align-items: center;
+}
+
+.section-title::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    background: url('data:image/svg+xml;utf8,\
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">\
+      <rect width="100" height="100" fill="%23a02c2c"/>\
+      <text x="50" y="62" text-anchor="middle" fill="%23fff" font-size="38" font-family="serif">艺</text>\
+    </svg>') center/contain no-repeat;
+}
+
+/* 非遗项目展示 */
+.heritage-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.heritage-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.heritage-card:hover {
+    transform: translateY(-5px);
+}
+
+.heritage-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.heritage-info {
+    padding: 15px;
+}
+
+.heritage-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #1e3a8a;
+}
+
+.heritage-region {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.heritage-desc {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 新闻资讯区 */
+.news-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.news-item {
+    display: flex;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.news-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.news-date {
+    min-width: 80px;
+    text-align: center;
+    padding-right: 15px;
+    border-right: 1px solid #eee;
+}
+
+.news-day {
+    font-size: 24px;
+    color: #a02c2c;
+    font-weight: bold;
+}
+
+.news-month {
+    font-size: 14px;
+    color: #666;
+}
+
+.news-content {
+    padding-left: 15px;
+    flex: 1;
+}
+
+.news-title {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.news-title a {
+    color: #1e3a8a;
+    text-decoration: none;
+}
+
+.news-title a:hover {
+    color: #a02c2c;
+    text-decoration: underline;
+}
+
+.news-brief {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* 分页控件 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    gap: 10px;
+}
+
+.page-btn {
+    padding: 8px 15px;
+    background: #f5f2eb;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #1e3a8a;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.page-btn:hover, .page-btn.active {
+    background: #a02c2c;
+    color: white;
+    border-color: #a02c2c;
+}
+
+/* 底部彩条样式 */
+:root{
+    --slot-color:#a02c2c;
+    --slot-height:130px;
+    --slot-gap:0px;
+    --slot-zoom:1.15;
+}
+
+.xfooter{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--slot-height);
+    z-index: 999;
+    pointer-events: none;
+}
+
+.xfooter .slot{
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+    gap: var(--slot-gap);
+    padding: 0 var(--slot-gap);
+}
+
+.xfooter .slot-track{
+    flex: 1 1 0;
+    position: relative;
+    height: 100%;
+    pointer-events: auto;
+    overflow: hidden;
+    border-radius: 6px 6px 0 0;
+}
+
+.xfooter .slot-item{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: center top / 100% auto no-repeat;
+    transition: transform .4s cubic-bezier(.25,.8,.25,1);
+    transform: translateY(100%) scale(var(--slot-zoom));
+}
+
+.xfooter .slot-track:hover .slot-item{
+    transform: translateY(-3%) scale(var(--slot-zoom));
+}
+
+/* 为不同的slot-item设置不同的背景图 */
+.xfooter .s1 { background-image: url(../image/slot/slot22.png); }
+.xfooter .s2 { background-image: url(../image/slot/slot2.png); }
+.xfooter .s3 { background-image: url(../image/slot/slot3.png); }
+.xfooter .s4 { background-image: url(../image/slot/slot4.png); }
+.xfooter .s5 { background-image: url(../image/slot/slot5.png); }
+.xfooter .s6 { background-image: url(../image/slot/slot6.png); }
+.xfooter .s7 { background-image: url(../image/slot/slot7.png); }
+.xfooter .s8 { background-image: url(../image/slot/slot8.png); }
+.xfooter .s9 { background-image: url(../image/slot/slot9.png); }
+.xfooter .s10 { background-image: url(../image/slot/slot10.png); }
+.xfooter .s11 { background-image: url(../image/slot/slot11.png); }
+.xfooter .s12 { background-image: url(../image/slot/slot12.png); }
+.xfooter .s13 { background-image: url(../image/slot/slot13.png); }
+.xfooter .s14 { background-image: url(../image/slot/slot14.png); }
+.xfooter .s15 { background-image: url(../image/slot/slot15.png); }
+.xfooter .s16 { background-image: url(../image/slot/slot16.png); }
+.xfooter .s17 { background-image: url(../image/slot/slot17.png); }
+.xfooter .s18 { background-image: url(../image/slot/slot18.png); }
+.xfooter .s19 { background-image: url(../image/slot/slot19.png); }
+.xfooter .s20 { background-image: url(../image/slot/slot20.png); }
+.xfooter .s21 { background-image: url(../image/slot/slot21.png); }
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .header-banner {
+        height: 250px;
+    }
+    
+    .banner-title {
+        font-size: 22px;
+    }
+    
+    .banner-desc {
+        font-size: 14px;
+    }
+    
+    .heritage-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+    }
+    
+    .news-item {
+        flex-direction: column;
+    }
+    
+    .news-date {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+}
+</style>
+</head>
+
+<body>
+<!-- 顶部轮播Banner -->
+<div class="header-banner">
+    <div class="banner-slider">
+        <div class="banner-slide active" style="background-image: url('https://picsum.photos/id/1015/1200/400')">
+            <div class="banner-caption">
+                <h2 class="banner-title">中国非物质文化遗产保护成果展</h2>
+                <p class="banner-desc">展示近年来我国非物质文化遗产保护工作的重要成果，传承中华优秀传统文化</p>
+            </div>
+        </div>
+        <div class="banner-slide" style="background-image: url('https://picsum.photos/id/1016/1200/400')">
+            <div class="banner-caption">
+                <h2 class="banner-title">国家级非遗代表性传承人研修计划</h2>
+                <p class="banner-desc">培养非遗传承人才，促进非遗项目的活态传承与创新发展</p>
+            </div>
+        </div>
+        <div class="banner-slide" style="background-image: url('https://picsum.photos/id/1018/1200/400')">
+            <div class="banner-caption">
+                <h2 class="banner-title">传统工艺振兴计划实施成果</h2>
+                <p class="banner-desc">推动传统工艺创造性转化、创新性发展，助力乡村振兴</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 导航栏 -->
+<nav class="heritage-nav">
+  <ul>
+	<li><a aria-current="page">首页</a></li>
+    <li><a href="../Medical/med-index1.html">传统医药</a></li>
+    <li><a href="#">传统舞蹈</a></li>
+    <li><a href="#">传统体育活动</a></li>
+    <li><a href="#">民俗节庆</a></li>
+  </ul>
 </nav>
 
-<!-- 3. 把下面样式插到原 <style>…</style> 内部任意位置即可 -->
-<style>
-    /* ---------- 搜索框样式 ---------- */
-    .tcm-search{
-        margin-left:auto;          /* 让搜索块靠右 */
-        display:flex;
-        align-items:center;
-        background:#fff;
-        border:2px solid #4a7c59;  /* 草药绿边框 */
-        border-radius:20px;
-        overflow:hidden;
-        width:240px;               /* 默认宽度 */
-        transition:width .3s;
-    }
-    .tcm-search input{
-        flex:1;
-        border:none;
-        outline:none;
-        padding:6px 12px;
-        font-size:15px;
-        color:#2b5329;
-        background:transparent;
-    }
-    .tcm-search button{
-        width:34px;height:34px;
-        border:none;
-        background:#4a7c59;
-        cursor:pointer;
-        display:grid;
-        place-items:center;
-    }
-    .tcm-search button svg{
-        width:20px;height:20px;
-        fill:#fff;
-    }
-    /* 聚焦时搜索框变宽 */
-    .tcm-search:focus-within{
-        width:320px;
-    }
-    /* 移动端自动撑满 */
-    @media(max-width:600px){
-        .tcm-search{
-            width:100%;
-            margin:8px 0 0 0;
+<!-- 主要内容区 -->
+<div class="container">
+    <!-- 非遗项目展示 -->
+    <h2 class="section-title">国家级非物质文化遗产项目</h2>
+    <div class="heritage-grid">
+        <div class="heritage-card">
+            <img src="https://picsum.photos/id/1025/400/300" alt="昆曲" class="heritage-img">
+            <div class="heritage-info">
+                <h3 class="heritage-name">昆曲</h3>
+                <div class="heritage-region">江苏省、浙江省</div>
+                <p class="heritage-desc">昆曲是中国最古老的戏曲剧种之一，被称为"百戏之祖"，距今已有600多年历史，2001年被列入"人类口述和非物质遗产代表作"。</p>
+            </div>
+        </div>
+        <div class="heritage-card">
+            <img src="https://picsum.photos/id/1026/400/300" alt="古琴艺术" class="heritage-img">
+            <div class="heritage-info">
+                <h3 class="heritage-name">古琴艺术</h3>
+                <div class="heritage-region">全国多个地区</div>
+                <p class="heritage-desc">古琴是中国最古老的弹拨乐器之一，古琴艺术包括琴曲、琴论、琴谱等，2003年被列入"人类口述和非物质遗产代表作"。</p>
+            </div>
+        </div>
+        <div class="heritage-card">
+            <img src="https://picsum.photos/id/1027/400/300" alt="端午节" class="heritage-img">
+            <div class="heritage-info">
+                <h3 class="heritage-name">端午节</h3>
+                <div class="heritage-region">全国多个地区</div>
+                <p class="heritage-desc">端午节是中国传统节日，以纪念屈原为核心，有赛龙舟、吃粽子等习俗，2009年被列入"人类非物质文化遗产代表作名录"。</p>
+            </div>
+        </div>
+        <div class="heritage-card">
+            <img src="https://picsum.photos/id/1028/400/300" alt="中医针灸" class="heritage-img">
+            <div class="heritage-info">
+                <h3 class="heritage-name">中医针灸</h3>
+                <div class="heritage-region">全国多个地区</div>
+                <p class="heritage-desc">中医针灸是中国传统医学的重要组成部分，包括针法和灸法，2010年被列入"人类非物质文化遗产代表作名录"。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新闻资讯 -->
+    <h2 class="section-title">非遗新闻资讯</h2>
+    <div class="news-list">
+        <div class="news-item">
+            <div class="news-date">
+                <div class="news-day">12</div>
+                <div class="news-month">六月</div>
+            </div>
+            <div class="news-content">
+                <h3 class="news-title"><a href="https://www.bjnews.com.cn/detail/1749713384129380.html#p=1">2025年"文化和自然遗产日"系列活动在京启动</a></h3>
+                <p class="news-brief">今年"文化和自然遗产日"的主题为"让文物焕发新活力，绽放新光彩"，全国各地将举办数千场非遗展示展演活动。</p>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">
+                <div class="news-day">17</div>
+                <div class="news-month">三月</div>
+            </div>
+            <div class="news-content">
+                <h3 class="news-title"><a href="https://news.cctv.com/2025/03/17/ARTIFFdFIA03jevZQGjCFj3F250317.shtml">第六批国家级非遗代表性传承人公布 共计942人</a></h3>
+                <p class="news-brief">文化和旅游部近日公布了第六批国家级非物质文化遗产代表性传承人名单，涵盖民间文学、传统音乐、传统舞蹈等多个门类。</p>
+            </div>
+        </div>
+        <div class="news-item">
+            <div class="news-date">
+                <div class="news-day">18</div>
+                <div class="news-month">三月</div>
+            </div>
+            <div class="news-content">
+                <h3 class="news-title"><a href="https://www.ihchina.cn/news_details/29815.html">习近平：民族的特色，很古朴也很时尚</a></h3>
+                <p class="news-brief">3月17日下午，习近平总书记在贵州省黔东南苗族侗族自治州考察了黎平县肇兴侗寨，了解当地加强基层党组织建设和社会治理、保护传承民族传统文化、推进乡村全面振兴等情况。</p>
+            </div>
+        </div>
+    </div>
+
+
+<!-- 底部彩条 -->
+<div class="xfooter">
+    <div class="slot">
+        <div class="slot-track">
+            <div class="slot-item s1"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s2"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s3"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s4"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s5"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s6"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s7"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s8"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s9"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s10"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s11"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s12"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s13"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s14"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s15"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s16"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s17"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s18"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s19"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s20"></div>
+        </div>
+        <div class="slot-track">
+            <div class="slot-item s21"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 等待DOM加载完成
+    document.addEventListener('DOMContentLoaded', function() {
+        // 导航链接处理
+        const navLinks = document.querySelectorAll('.heritage-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                const href = this.getAttribute('href');
+                if (href === '#' || !href) {
+                    event.preventDefault();
+                    window.location.href = '../index/404.html';
+                }
+            });
+        });
+
+        // 轮播图功能
+        const slides = document.querySelectorAll('.banner-slide');
+        let currentSlide = 0;
+        
+        function showSlide(index) {
+            // 隐藏所有幻灯片
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            // 显示当前幻灯片
+            slides[index].classList.add('active');
         }
-        .tcm-search:focus-within{
-            width:100%;
+        
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
         }
-    }
-</style>
+        
+        // 自动轮播，每5秒切换一次
+        setInterval(nextSlide, 5000);
+
+        // 分页功能
+        const pageBtns = document.querySelectorAll('.page-btn');
+        pageBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // 移除所有按钮的active类
+                pageBtns.forEach(b => b.classList.remove('active'));
+                // 给当前点击的按钮添加active类
+                this.classList.add('active');
+                
+                // 实际项目中可以在这里加载对应页面的内容
+                const pageId = this.getAttribute('href');
+                if (pageId && pageId.startsWith('#page')) {
+                    e.preventDefault();
+                    // 可以添加页面切换动画或内容加载逻辑
+                    console.log('切换到页面: ' + pageId);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
