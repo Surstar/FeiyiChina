@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>热贡艺术——壁画</title>
+<!-- TemplateEndEditable -->
+<link href="../style/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="../Scripts/banner.js"></script>
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+</head>
+<body>
+<div class="main">
+<div class="top">
+<div class="logo"><img src="../images/logo.png" /></div>
+<div class="right">
+<div class="sous">
+        <input type="text" name="search" value="在这里搜索...">
+        <div id="search"></div> 
+    </div>
+    <div class="dl"><a href="#"><img src="../images/denglu.png" /></a></div>
+    <div class="dl"><a href="#"><img src="../images/zhuce.png" /></a></div>
+</div>
+
+</div>
+<div class="nav marb40">
+  <ul>
+    <!-- TemplateBeginEditable name="nav" -->
+     <li><a class="hos" href="index.html">首页</a></li>
+<li class="nav_menu-item"><a href="#">壁画源流</a>
+<ul class="nav_submenu">
+        <li class="nav_submenu-item"> <a href="qingming.html">明清时期</a></li>
+        <li class="nav_submenu-item"> <a href="qinhan.html">秦汉时期</a></li>
+        <li class="nav_submenu-item"> <a href="shiqi.html">石器时代</a></li>
+        <li class="nav_submenu-item"> <a href="qiangtie.html">墙贴</a></li>
+        <li class="nav_submenu-item"> <a href="zhuangshi.html">装饰壁画</a></li>
+        <li class="nav_submenu-item"> <a href="xiandai.html">现代时期</a></li>
+      </ul>
+
+</li>
+<li><a href="chuancheng.html">传承保护</a></li>
+<li class="nav_menu-item"><a href="#">传统壁画</a>
+
+<ul class="nav_submenu">
+        <li class="nav_submenu-item"> <a href="dianting.html">殿庭壁画</a></li>
+        <li class="nav_submenu-item"> <a href="muzang.html">墓葬壁画</a></li>
+        <li class="nav_submenu-item"> <a href="shiku.html">石窟壁画</a></li>
+        <li class="nav_submenu-item"> <a href="siguan.html">寺观壁画</a></li>
+       </ul>
+</li>
+<li class="nav_menu-item"><a href="#">文化创作</a>
+<ul class="nav_submenu">
+        <li class="nav_submenu-item"> <a href="wenhua.html">壁画文化</a></li>
+       <li class="nav_submenu-item"> <a href="shuqian.html">书签文创</a></li>
+       </ul>
+</li>
+<li><a href="lianxi.html">联系我们</a></li>
+      <!-- TemplateEndEditable -->
+  </ul>
+</div>
+<div class="nerye">
+<!-- TemplateBeginEditable name="neir" -->
+
+<!-- TemplateEndEditable -->
+
+</div>
+<div class="foot">
+<p> |&nbsp;<a href="#">版权申明</a>&nbsp; |&nbsp;<a href="#"> 联系我们 </a>&nbsp;|&nbsp;<a  href="#">友情链接</a>&nbsp; |&nbsp; </p>
+<p>艺术专区热贡壁画文化有限公司 版权所有 徽ICP备11032616号</p>
+</div>
+
+</div>
+
+</body>
+</html>
