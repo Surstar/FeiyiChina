@@ -403,22 +403,23 @@ nav.heritage-nav a[aria-current="page"]{
 </head>
 
 <body>
+<audio id="bgMusic" src="music/huanlege.m4a" autoplay loop></audio>
 <!-- 顶部轮播Banner -->
 <div class="header-banner">
     <div class="banner-slider">
-        <div class="banner-slide active" style="background-image: url('https://picsum.photos/id/1015/1200/400')">
+        <div class="banner-slide active" style="background-image: url('image/piying.png');')">
             <div class="banner-caption">
                 <h2 class="banner-title">中国非物质文化遗产保护成果展</h2>
                 <p class="banner-desc">展示近年来我国非物质文化遗产保护工作的重要成果，传承中华优秀传统文化</p>
             </div>
         </div>
-        <div class="banner-slide" style="background-image: url('https://picsum.photos/id/1016/1200/400')">
+        <div class="banner-slide" style="background-image: url('image/yanxue.png');')">
             <div class="banner-caption">
                 <h2 class="banner-title">国家级非遗代表性传承人研修计划</h2>
                 <p class="banner-desc">培养非遗传承人才，促进非遗项目的活态传承与创新发展</p>
             </div>
         </div>
-        <div class="banner-slide" style="background-image: url('https://picsum.photos/id/1018/1200/400')">
+        <div class="banner-slide" style="background-image: url('image/yanxuechuangshou.png')">
             <div class="banner-caption">
                 <h2 class="banner-title">传统工艺振兴计划实施成果</h2>
                 <p class="banner-desc">推动传统工艺创造性转化、创新性发展，助力乡村振兴</p>
@@ -435,6 +436,7 @@ nav.heritage-nav a[aria-current="page"]{
     <li><a href="Cixiu/rescode/html/index.html">传统艺术</a></li>
     <li><a href="#">传统体育活动</a></li>
     <li><a href="#">民俗节庆</a></li>
+      <li><a href="index/404.html">彩蛋</a></li>
   </ul>
 </nav>
 
@@ -444,7 +446,7 @@ nav.heritage-nav a[aria-current="page"]{
     <h2 class="section-title">国家级非物质文化遗产项目</h2>
     <div class="heritage-grid">
         <div class="heritage-card">
-            <img src="https://picsum.photos/id/1025/400/300" alt="昆曲" class="heritage-img">
+            <img src="image/kunqu.png" alt="昆曲" class="heritage-img">
             <div class="heritage-info">
                 <h3 class="heritage-name">昆曲</h3>
                 <div class="heritage-region">江苏省、浙江省</div>
@@ -452,7 +454,7 @@ nav.heritage-nav a[aria-current="page"]{
             </div>
         </div>
         <div class="heritage-card">
-            <img src="https://picsum.photos/id/1026/400/300" alt="古琴艺术" class="heritage-img">
+            <img src="image/guqin.png" alt="古琴艺术" class="heritage-img">
             <div class="heritage-info">
                 <h3 class="heritage-name">古琴艺术</h3>
                 <div class="heritage-region">全国多个地区</div>
@@ -460,7 +462,7 @@ nav.heritage-nav a[aria-current="page"]{
             </div>
         </div>
         <div class="heritage-card">
-            <img src="https://picsum.photos/id/1027/400/300" alt="端午节" class="heritage-img">
+            <img src="image/duanwujie.jpg" alt="端午节" class="heritage-img">
             <div class="heritage-info">
                 <h3 class="heritage-name">端午节</h3>
                 <div class="heritage-region">全国多个地区</div>
@@ -468,7 +470,7 @@ nav.heritage-nav a[aria-current="page"]{
             </div>
         </div>
         <div class="heritage-card">
-            <img src="https://picsum.photos/id/1028/400/300" alt="中医针灸" class="heritage-img">
+            <img src="image/zhenjiuindex.png" alt="中医针灸" class="heritage-img">
             <div class="heritage-info">
                 <h3 class="heritage-name">中医针灸</h3>
                 <div class="heritage-region">全国多个地区</div>
@@ -649,13 +651,28 @@ nav.heritage-nav a[aria-current="page"]{
                 if (href === '#' || !href) {
                     // 阻止默认跳转行为（避免跳转到页面顶部）
                     event.preventDefault();
-                    // 跳转到 404 页面（路径根据实际情况调整）
+                    // 跳转到 404 页面
                     window.location.href = '../index/404.html';
                 }
             });
         });
     });
+    const audio = document.getElementById('bgMusic');
+
+    // 处理播放失败
+    audio.addEventListener('error', function() {
+        alert('音乐加载失败，请检查文件路径');
+    });
+
+    // 检测自动播放是否被阻止
+    audio.play().catch(error => {
+        console.log('自动播放被阻止:', error);
+        // 可在此处显示提示信息
+    });
 </script>
 
+
+
+</div>
 </body>
 </html>

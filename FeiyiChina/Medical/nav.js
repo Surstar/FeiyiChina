@@ -1,6 +1,6 @@
 const navHtml = `
 <nav class="tcm-nav">
-  <a href="../../index/index.html">首页</a>
+  <a href="../../index.html">首页</a>
   <a href="../med-index1.html">医药主页</a>
   <a href="../list/list.html">名录</a>
   <a href="pedia.html">知识库</a>

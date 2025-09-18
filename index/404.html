@@ -35,6 +35,9 @@
         /* 按钮交互 */
         .btn-hover { transition: all 0.3s ease; }
         .btn-hover:hover { transform: translateY(-2px); }
+        .error-video{max-width:320px;width:100%;height:auto;margin:0 auto 24px;border-radius:8px;}
+        @media(max-width:640px){.error-video{max-width:260px;}}
+        @media(max-width:400px){.error-video{max-width:200px;}}
     </style>
 </head>
 <body class="bg-[#FFF9E8] flex flex-col items-center justify-center min-h-screen p-4 font-noto">
@@ -71,27 +74,16 @@
     <!-- 文字说明 -->
     <div class="font-msz text-[#B91C1C] text-[24px] md:text-[22px] sm:text-[20px] mb-2">页面未找到</div>
     <div class="text-[#333333] text-[14px] md:text-[13px] sm:text-[12px] mb-10">您访问的页面已失效或地址有误</div>
-
+    <video class="error-video" src = '../music/huanlege.mp4' autoplay loop playsinline controls></video>
     <!-- 导航按钮区 -->
     <div class="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-md">
-        <button onclick="window.location.href='../../index.html'" class="btn-hover bg-[#B91C1C] text-white px-6 py-2.5 rounded-lg border border-[#FBBF24] flex items-center justify-center gap-2">
+        <button onclick="window.location.href='../index.html'" class="btn-hover bg-[#B91C1C] text-white px-6 py-2.5 rounded-lg border border-[#FBBF24] flex items-center justify-center gap-2">
             <svg class="w-4 h-4" viewBox="0 0 16 16" fill="white">
                 <path d="M8,2 L2,8 L8,14 L14,8 L8,2 Z M8,12 L4,8 L8,4 L12,8 L8,12 Z"/>
             </svg>
             返回首页
         </button>
-        <button class="btn-hover bg-white text-[#B91C1C] border border-[#B91C1C] px-6 py-2.5 rounded-lg flex items-center justify-center gap-2">
-            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="#B91C1C">
-                <path d="M8,3 C5,3 3,5 3,8 C3,11 5,13 8,13 C11,13 13,11 13,8 C13,5 11,3 8,3 Z M8,11 C6,11 4,9 4,8 C4,7 5,6 8,6 C11,6 12,7 12,8 C12,9 10,11 8,11 Z M9,8 L7,8 L7,10 L9,10 L9,8 Z"/>
-            </svg>
-            查看导航
-        </button>
-        <button onclick="window.location.href = 'mailto:3532117961@qq.com'" class="btn-hover bg-white text-[#333333] border border-[#333333] px-6 py-2.5 rounded-lg flex items-center justify-center gap-2">
-            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="#333333">
-                <path d="M3,5 L13,5 L13,11 L3,11 L3,5 Z M4,6 L12,6 L12,10 L4,10 L4,6 Z M2,5 C1.5,5 1,5.5 1,6 L1,10 C1,10.5 1.5,11 2,11 L3,11 L3,12 C3,12.5 3.5,13 4,13 L12,13 C12.5,13 13,12.5 13,12 L13,11 L14,11 C14.5,11 15,10.5 15,10 L15,6 C15,5.5 14.5,5 14,5 L13,5 L13,4 C13,3.5 12.5,3 12,3 L4,3 C3.5,3 3,3.5 3,4 L3,5 L2,5 Z"/>
-            </svg>
-            联系我们
-        </button>
+
     </div>
 </div>
 
@@ -102,11 +94,7 @@
         <span>用心介绍 让爱联结</span>
         <div class="w-5 h-0.5 bg-[#B91C1C]"></div>
         <!-- 返回顶部图标 -->
-        <button class="ml-4 text-[#B91C1C]">
-            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M8,12 L2,6 L3.5,4.5 L8,9 L12.5,4.5 L14,6 L8,12 Z"/>
-            </svg>
-        </button>
+
     </div>
 </div>
 
