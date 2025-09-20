@@ -1,6 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <script src="Scripts/injectlogo.js"></script>
+<style>
+    #displayVideo{max-width:320px;width:100%;height:auto;margin:0 auto 24px;border-radius:8px;}
+    @media(max-width:640px){#displayVideo{max-width:260px;}}
+    @media(max-width:400px){#displayVideo{max-width:200px;}}
+</style>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>热贡艺术——壁画</title>
@@ -80,7 +85,7 @@
 <img src="images/ri01.jpg" />
 <audio src="images/30.mp4" autoplay controls loop style="margin-top: -70px; margin-left: 10px;"></audio>
 <h2>青绣是什么?</h2>
-<video src="images/31.mp4" width="300px" controls loop style="float: left; padding-right: 30px;"></video>
+<video id="displayVideo" autoplay loop playsinline controls></video>
 <p style="margin-top: -20px;">青海民间刺绣简称青绣，具有浓厚的地方特色和民族特色，人们用它来装饰和美化生活，表达自己的理想和愿望。青绣是青海藏绣、土族盘绣、涅中堆绣、河涅刺绣、撒拉族刺绣、蒙古族刺绣等的总称,以地域命名。</p>
 <p>
 青绣从秦汉时期丝绸之路南路开通时兴起延续不断发展至今，历史悠久，在青海人民生活中占据着十分重要的位置，是参与人数最多、应用最广泛、影响最持久、与各族人民群众生活最密切的一种民间艺术。
@@ -93,6 +98,23 @@
 </div>
 
 </div>
+<script src="Scripts/hls.min.js"></script>
+<!-- 返回顶部JS -->
+<script>
+    const video = document.getElementById('displayVideo');
+    const src   = 'images/hls_output/index.m3u8';   // 本地/局域网地址均可
 
+    if (Hls.isSupported()) {
+        const hls = new Hls({ debug: false });
+        hls.loadSource(src);
+        hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        // iPhone / Safari 原生
+        video.src = src;
+    } else {
+        alert('浏览器不支持 HLS');
+    }
+</script>
 </body>
+
 </html>
