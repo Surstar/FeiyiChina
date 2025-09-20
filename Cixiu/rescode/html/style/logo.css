@@ -1,0 +1,13 @@
+/* 顶部 logo 容器 */
+.top-logo {
+    text-align: left;   /* 居中 */
+    padding: 15px 0;      /* 上下留点呼吸感 */
+    background:#fff;      /* 如果导航背景是白色，可省略 */
+}
+
+/* 控制图片大小 */
+.top-logo img {
+    width: 50px;        /* 按需改 */
+    height: 45px;        /* 等比缩放 */
+    display: inline-block;
+}

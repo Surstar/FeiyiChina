@@ -6,6 +6,7 @@
     <title>404 - 页面未找到</title>
     <!-- 引入Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.0/dist/hls.min.js"></script>
     <!-- 引入书法字体（马善政）和无衬线字体 -->
     <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Sans+SC:wght@400;500&display=swap" rel="stylesheet">
     <style>
@@ -35,9 +36,9 @@
         /* 按钮交互 */
         .btn-hover { transition: all 0.3s ease; }
         .btn-hover:hover { transform: translateY(-2px); }
-        .error-video{max-width:320px;width:100%;height:auto;margin:0 auto 24px;border-radius:8px;}
-        @media(max-width:640px){.error-video{max-width:260px;}}
-        @media(max-width:400px){.error-video{max-width:200px;}}
+        #error-video{max-width:320px;width:100%;height:auto;margin:0 auto 24px;border-radius:8px;}
+        @media(max-width:640px){#error-video{max-width:260px;}}
+        @media(max-width:400px){#error-video{max-width:200px;}}
     </style>
 </head>
 <body class="bg-[#FFF9E8] flex flex-col items-center justify-center min-h-screen p-4 font-noto">
@@ -74,7 +75,7 @@
     <!-- 文字说明 -->
     <div class="font-msz text-[#B91C1C] text-[24px] md:text-[22px] sm:text-[20px] mb-2">页面未找到</div>
     <div class="text-[#333333] text-[14px] md:text-[13px] sm:text-[12px] mb-10">您访问的页面已失效或地址有误</div>
-    <video class="error-video" src = '../music/huanlege.mp4' autoplay loop playsinline controls></video>
+    <video id="error-video" autoplay loop playsinline controls></video>
     <!-- 导航按钮区 -->
     <div class="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-md">
         <button onclick="window.location.href='../index.html'" class="btn-hover bg-[#B91C1C] text-white px-6 py-2.5 rounded-lg border border-[#FBBF24] flex items-center justify-center gap-2">
@@ -97,12 +98,27 @@
 
     </div>
 </div>
-
+<script src="hls.min.js"></script>
 <!-- 返回顶部JS -->
 <script>
     document.querySelector('button:last-child').addEventListener('click', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+</script>
+<script>
+    const video = document.getElementById('error-video');
+    const src   = '../music/index.m3u8';   // 本地/局域网地址均可
+
+    if (Hls.isSupported()) {
+        const hls = new Hls({ debug: false });
+        hls.loadSource(src);
+        hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        // iPhone / Safari 原生
+        video.src = src;
+    } else {
+        alert('浏览器不支持 HLS');
+    }
 </script>
 </body>
 </html>

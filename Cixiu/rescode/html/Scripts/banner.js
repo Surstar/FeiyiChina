@@ -1,4 +1,3 @@
-// 懒人图库 搜集整理 www.lanrentuku.com
 function getStyle(obj,name)
 {
 	if(obj.currentStyle)

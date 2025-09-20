@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            padding: 15px;
+        }
+       
+        .nuo-card-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        
+        .nuo-card {
+            background-color: #fff9e6;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+      
+        .card-title {
+            font-size: 17px;
+            color: #2c3e50;
+            font-weight: 700;
+            border-bottom: 2px solid #d4b866;
+            padding-bottom: 8px;
+        }
+       
+        .card-img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+       
+        .card-content {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        .card-content p {
+            margin-bottom: 8px;
+        }
+        .card-content p:last-child {
+            margin-bottom: 0;
+        }
+       
+        .copyright {
+            max-width: 800px;
+            margin: 12px auto 0;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+    .STYLE1 {
+	font-family: "����";
+	font-size: 18px;
+}
+    </style>
+</head>
+<head>
+    <meta charset="UTF-8">
+    <title>文字 hover 背景变色</title>
+    <style>
+        /* 基础页面样式：居中布局，优化阅读体验 */
+        body {
+            padding: 50px;
+            font-family: "Microsoft YaHei", sans-serif;
+            line-height: 1.8;
+        }
+
+        /* 单个文字块（如标题、标签）hover 背景变色 */
+        .text-block {
+            display: inline-block; /* 仅包裹文字区域 */
+            padding: 8px 16px;
+            font-size: 20px;
+            font-weight: 500;
+            color: #2d3748;
+            border-radius: 6px; /* 圆角背景，更柔和 */
+            /* 过渡效果：背景色变化更丝滑 */
+            transition: background-color 0.3s ease;
+        }
+        .text-block:hover {
+            background-color: #e6f7ff; /* hover 时的淡蓝色背景 */
+            color: #1890ff; /*同步改变文字颜色，增强对比 */
+        }
+    </style>
+</head>
+<body>
+<table width="1462" border="0" bgcolor="#8A0000">
+  <tr>
+    <td width="181" height="49">&nbsp;</td>
+    <td width="219"><span class="STYLE1">分类流派</span></td>
+    <td width="1040">&nbsp;</td>
+  </tr>
+</table>
+
+    <div class="nuo-card-container">
+      
+        <div class="nuo-card">
+            <h3 class="card-title">赣傩——江西传统傩戏流派</h3>
+          
+  <img src="../../图片/傩戏11.jpg" width="257" height="197">
+            <div class="card-content">
+                <p>作为江西地区最具代表性的傩戏流派，赣傩历史悠久、文化底蕴深厚，以独特的面具造型、古朴的表演风格和浓郁的地方特色著称，是当地民众精神信仰与文化传承的重要载体。</p >
+                <p>其表演形式丰富多样，既有庄严的祭祀仪式，也有生动的戏剧表演；面具工艺精湛、色彩鲜艳，每个面具都有特定含义与象征，漫长历史中形成的独特艺术风格，使其成为中华民族文化宝库中的珍贵遗产。</p >
+            </div>
+        </div>
+
+       
+        <div class="nuo-card">
+            <h3 class="card-title">湘傩——湖南特色傩戏传统</h3>
+          
+         <img src="../../图片/傩戏12.jpg" width="257" height="197">
+            <div class="card-content">
+                <p>湘傩是湖南地区独具特色的傩戏流派，融合楚文化的神秘色彩与湖湘文化的豪放特质，以粗犷的表演风格、浓烈的乡土气息和独特的音乐唱腔著称，体现湖南人民淳朴厚重的文化传统，也是民间信仰与文化认同的重要体现。</p >
+                <p>其面具造型奇特、色彩对比强烈，充满原始艺术张力；表演内容涵盖驱邪纳福仪式与生动民间故事，传承中既保留原有古朴特色，又融入时代元素，展现出强大的生命力与文化价值。</p >
+            </div>
+        </div>
+
+      
+        <div class="nuo-card">
+            <h3 class="card-title">黔傩——贵州古老傩戏艺术</h3>
+         
+     <img src="../../图片/傩戏10.jpg" width="257" height="197">
+            <div class="card-content">
+                <p>作为贵州地区最为古老的傩戏流派之一，黔傩承载着浓厚的少数民族文化特色，以神秘的仪式感、精美的面具工艺和独特的表演形式著称，是贵州多民族文化融合的重要体现，也是当地民众精神寄托与文化传承的重要载体。</p >
+                <p>其面具制作工艺精湛、造型奇特、色彩绚丽，每个面具都蕴含深刻的文化内涵与象征意义；表演内容丰富多样，既有庄严的祭祀仪式，也有生动的民间传说，历史传承中保持的原始艺术特色，使其成为研究中国古代戏曲和民俗文化的珍贵资料。</p >
+            </div>
+        </div>
+    </div>
+   <table width="1393" border="0" bgcolor="#FFFFDB">
+  <tr>
+    <td width="920">&nbsp;</td>
+    <td width="463"><div class="text-block"><a href="../舞蹈首页.html" target="_blank">返回</a></div></td>
+  </tr>
+</table>
+
+</body>
+</html>
