@@ -39,6 +39,53 @@
         #error-video{max-width:320px;width:100%;height:auto;margin:0 auto 24px;border-radius:8px;}
         @media(max-width:640px){#error-video{max-width:260px;}}
         @media(max-width:400px){#error-video{max-width:200px;}}
+        #netAlertBox{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.45);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            z-index:9999;
+            animation:fadeIn .4s;
+        }
+        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+        #netAlertBox .card{
+            width:320px;
+            background:#fdfaf4;
+            border:2px solid #a02c2c;
+            border-radius:10px;
+            padding:28px 24px;
+            text-align:center;
+            box-shadow:0 8px 25px rgba(0,0,0,.25);
+            transform:translateY(-30px);
+            animation:slideIn .5s forwards;
+        }
+        @keyframes slideIn{to{transform:translateY(0)}}
+
+        #netAlertBox h4{
+            margin:0 0 12px;
+            font-size:20px;
+            color:#a02c2c;
+        }
+        #netAlertBox p{
+            margin:0 0 18px;
+            font-size:15px;
+            color:#2a2a2a;
+            line-height:1.7;
+        }
+        #netAlertBox .closeBtn{
+            background:#a02c2c;
+            color:#fff;
+            border:none;
+            padding:7px 20px;
+            border-radius:4px;
+            cursor:pointer;
+            font-size:14px;
+            transition:background .3s;
+        }
+        #netAlertBox .closeBtn:hover{background:#7a2222}
     </style>
 </head>
 <body class="bg-[#FFF9E8] flex flex-col items-center justify-center min-h-screen p-4 font-noto">
@@ -90,17 +137,18 @@
 
 <!-- 页脚区域 -->
 <div class="absolute bottom-6 flex items-center justify-center w-full px-4">
-    <div class="flex items-center gap-2 text-[#666666] text-[12px] sm:text-[10px]">
+    <a href="2025-9-11%20化学知识点%20初中%20171205.md" class="flex items-center gap-2 text-[#666666] text-[12px] sm:text-[10px]" >
         <div class="w-5 h-0.5 bg-[#B91C1C]"></div>
         <span>用心介绍 让爱联结</span>
         <div class="w-5 h-0.5 bg-[#B91C1C]"></div>
         <!-- 返回顶部图标 -->
 
-    </div>
+    </a>
 </div>
 <script src="hls.min.js"></script>
 <!-- 返回顶部JS -->
 <script>
+
     document.querySelector('button:last-child').addEventListener('click', function() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -118,6 +166,30 @@
         video.src = src;
     } else {
         alert('浏览器不支持 HLS');
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        showNetAlert();
+    });
+    function showNetAlert(){
+        if(document.getElementById('netAlertBox')) return; // 避免重复
+
+        const box = document.createElement('div');
+        box.id = 'netAlertBox';
+        box.innerHTML =
+            `<div class="card">
+      <h4>似乎有哪里不太对？</h4>
+      <p>看来是您了解的知识太多了！<br>
+      您来到了没有知识的汪洋……<br>看会视频休息会吧！
+      </p>
+      <button class="closeBtn" onclick="closeNetAlert()">知道了</button>
+    </div>`;
+        document.body.appendChild(box);
+
+    }
+
+    function closeNetAlert(){
+        const n = document.getElementById('netAlertBox');
+        if(n) n.remove();
     }
 </script>
 </body>

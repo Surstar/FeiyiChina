@@ -674,5 +674,105 @@ nav.heritage-nav a[aria-current="page"]{
 
 
 </div>
+<!-- ===== 网络检测 & 页内提醒 ===== -->
+<style>
+    /* 弹层基础 */
+    #netAlertBox{
+        position:fixed;
+        inset:0;
+        background:rgba(0,0,0,.45);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        z-index:9999;
+        animation:fadeIn .4s;
+    }
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    #netAlertBox .card{
+        width:320px;
+        background:#fdfaf4;
+        border:2px solid #a02c2c;
+        border-radius:10px;
+        padding:28px 24px;
+        text-align:center;
+        box-shadow:0 8px 25px rgba(0,0,0,.25);
+        transform:translateY(-30px);
+        animation:slideIn .5s forwards;
+    }
+    @keyframes slideIn{to{transform:translateY(0)}}
+
+    #netAlertBox h4{
+        margin:0 0 12px;
+        font-size:20px;
+        color:#a02c2c;
+    }
+    #netAlertBox p{
+        margin:0 0 18px;
+        font-size:15px;
+        color:#2a2a2a;
+        line-height:1.7;
+    }
+    #netAlertBox .closeBtn{
+        background:#a02c2c;
+        color:#fff;
+        border:none;
+        padding:7px 20px;
+        border-radius:4px;
+        cursor:pointer;
+        font-size:14px;
+        transition:background .3s;
+    }
+    #netAlertBox .closeBtn:hover{background:#7a2222}
+</style>
+
+<script>
+    /* ---------- 检测网络 ---------- */
+    (function checkNetwork(){
+        const img = new Image();
+        let done = false;
+        const timer = setTimeout(()=>{
+            done = true;
+            showNetAlert();
+        },200);
+
+        img.onload = ()=>{
+            if(!done){          // 成功
+                clearTimeout(timer);
+                console.log('[Net] 已联网');
+            }
+        };
+        img.onerror = ()=>{   // 失败
+            if(done) return;
+            clearTimeout(timer);
+            showNetAlert();
+        };
+        img.src = 'https://www.baidu.com/22favicon.ico?_t='+Date.now();
+    })();
+
+    /* ---------- 显示页内提醒 ---------- */
+    function showNetAlert(){
+        if(document.getElementById('netAlertBox')) return; // 避免重复
+
+        const box = document.createElement('div');
+        box.id = 'netAlertBox';
+        box.innerHTML =
+            `<div class="card">
+      <h4>似乎有哪里不太对？</h4>
+      <p>推荐您和互联网建立连接！<br>
+      连接后的体验以及效果会更好！</p>
+      <button class="closeBtn" onclick="closeNetAlert()">知道了</button>
+    </div>`;
+        document.body.appendChild(box);
+
+        // 5 秒后自动关闭
+    }
+
+    function closeNetAlert(){
+        const n = document.getElementById('netAlertBox');
+        if(n) n.remove();
+    }
+</script>
+<!-- ===== END 网络检测 ===== -->
 </body>
 </html>
